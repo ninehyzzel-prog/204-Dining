@@ -1,0 +1,272 @@
+[
+  {
+    "id": 1,
+    "category": "MAINS",
+    "num": "01",
+    "name": "Tonteki",
+    "nameKo": "돈테키",
+    "sub": "불향과 육즙이 완성하는 깊은 풍미",
+    "desc": "두툼한 돼지고기를 노릇하게 구워 특제 마늘 간장 소스로 풍미를 더한 일본식 스테이크. 부드러운 육즙과 달콤 짭조름한 감칠맛이 조화를 이룹니다.",
+    "ingredients": "Pork Loin · Garlic · Soy Sauce · Worcestershire Sauce",
+    "image": "assets/uploads/1792090818489_ChatGPT_____2026__10__16_____02_47_39-1.png",
+    "frames360": [
+      "assets/uploads/1792090818489_ChatGPT_____2026__10__16_____02_47_39-1.png"
+    ],
+    "audio": "assets/audio/f8d646ad-66d7-43c0-868c-f61482741ec2.mp3",
+    "model": "assets/models/31fc93b2-c676-4c62-b623-ce46cea79a48.glb",
+    "soldOut": false,
+    "stock": 1
+  },
+  {
+    "id": 2,
+    "category": "SIGNATURE",
+    "num": "02",
+    "name": "Seaweed Soup with Striploin",
+    "nameKo": "채끝살 스테이크 미역국",
+    "sub": "익숙한 국물 위에 더해진 특별한 한 점",
+    "desc": "깊고 맑게 우려낸 미역국 위에 미디엄 레어로 구워낸 채끝살을 곁들였습니다. 담백한 국물과 진한 육향이 어우러진 특별한 한 그릇입니다.",
+    "ingredients": "Beef Striploin · Seaweed · Beef Broth · Sesame Oil",
+    "image": "assets/uploads/1792093545579_a563d875-587b-4032-b83b-d8791d247c0f.png",
+    "frames360": [
+      "assets/uploads/1792093545579_a563d875-587b-4032-b83b-d8791d247c0f.png"
+    ],
+    "audio": "assets/audio/fa6785d1-a259-4328-96a0-74e15e52a733.mp3",
+    "model": "assets/models/5259bd23-c963-495a-b391-84c58e27d3ff.glb",
+    "soldOut": false,
+    "stock": 6
+  },
+  {
+    "id": 3,
+    "category": "STARTERS",
+    "num": "03",
+    "name": "Chilled Sliced Pork",
+    "nameKo": "냉수육",
+    "sub": "차분하게 식혀 완성한 담백한 풍미",
+    "desc": "정성껏 삶아 차갑게 식힌 돼지고기를 얇게 썰어 담았습니다. 촉촉하고 부드러운 육질과 담백하고 깔끔한 맛을 즐길 수 있습니다.",
+    "ingredients": "Pork Belly · Ginger · Garlic · Green Onion",
+    "image": "assets/uploads/1792093595037_ChatGPT_____2026__10__16_____02_47_41-3.png",
+    "frames360": [
+      "assets/uploads/1792093595037_ChatGPT_____2026__10__16_____02_47_41-3.png"
+    ],
+    "audio": "assets/audio/febbe4a2-1bed-41ae-a09e-6669bf71d4be.mp3",
+    "model": "assets/models/92d5835a-6943-4693-87e7-d8eb336dcbd2.glb",
+    "soldOut": false,
+    "stock": 1
+  },
+  {
+    "id": 4,
+    "category": "MAINS",
+    "num": "04",
+    "name": "Duck & Mushroom Hot Pot",
+    "nameKo": "오리전골",
+    "sub": "깊은 육수에 담아낸 자연의 풍요로움",
+    "desc": "깊고 진한 육수에 부드러운 오리고기와 신선한 채소, 다양한 버섯을 푸짐하게 담았습니다. 끓일수록 깊어지는 풍미가 매력적인 전골 요리입니다.",
+    "ingredients": "Duck · Shiitake Mushrooms · Enoki Mushrooms · Napa Cabbage · Broth",
+    "image": "assets/uploads/1792093632601_ChatGPT_____2026__10__16_____02_47_43-5.png",
+    "frames360": [
+      "assets/uploads/1792093632601_ChatGPT_____2026__10__16_____02_47_43-5.png"
+    ],
+    "audio": "assets/audio/8ecc4d89-a262-4101-a643-f41eccb230d6.mp3",
+    "model": "assets/models/924b9a46-b8e9-48c2-93dc-087ecea393d2.glb",
+    "soldOut": false,
+    "stock": 1
+  },
+  {
+    "id": 5,
+    "category": "STARTERS",
+    "num": "05",
+    "name": "Japchae — Stir-Fried Glass Noodles",
+    "nameKo": "잡채",
+    "sub": "다채로운 재료가 빚어내는 조화로운 맛",
+    "desc": "쫄깃한 당면에 소고기와 여러 채소를 더해 향긋한 참기름과 간장으로 볶아냈습니다. 재료 본연의 풍미와 은은한 단맛이 어우러진 전통 요리입니다.",
+    "ingredients": "Glass Noodles · Beef · Spinach · Shiitake Mushrooms · Sesame Oil",
+    "image": "assets/uploads/1792093691139_ChatGPT_____2026__10__16_____02_47_44-6.png",
+    "frames360": [
+      "assets/uploads/1792093691139_ChatGPT_____2026__10__16_____02_47_44-6.png"
+    ],
+    "audio": "assets/audio/2c243bbf-5d0c-4860-9518-10a12a482916.mp3",
+    "model": "assets/models/4b9312cb-45fc-49e7-bbf8-d65ffe0b9ff1.glb",
+    "soldOut": false,
+    "stock": 1
+  },
+  {
+    "id": 6,
+    "category": "MAINS",
+    "num": "06",
+    "name": "Spicy Tofu & Tuna Stew",
+    "nameKo": "두부참치짜글이",
+    "sub": "매콤한 국물에 녹아든 진한 감칠맛",
+    "desc": "부드러운 두부와 고소한 참치를 매콤한 양념에 자작하게 끓였습니다. 진하고 칼칼한 국물이 밥과 잘 어울리는 든든한 한식 요리입니다.",
+    "ingredients": "Tofu · Tuna · Gochugaru · Onion · Green Onion",
+    "image": "assets/uploads/1792093730139_ChatGPT_____2026__10__16_____02_47_46-7.png",
+    "frames360": [
+      "assets/uploads/1792093730139_ChatGPT_____2026__10__16_____02_47_46-7.png"
+    ],
+    "audio": "assets/audio/6eb87800-895c-4951-9049-8f48dff0ab46.mp3",
+    "model": "assets/models/fb39df40-ab82-4b15-a393-c2f223adbc4b.glb",
+    "soldOut": false,
+    "stock": 1
+  },
+  {
+    "id": 7,
+    "category": "MAINS",
+    "num": "07",
+    "name": "Spicy Stir-Fried Pork Cartilage",
+    "nameKo": "오돌뼈볶음",
+    "sub": "바삭한 식감과 화끈한 불향의 만남",
+    "desc": "오독오독 씹히는 오돌뼈를 매콤달콤한 특제 양념에 볶아냈습니다. 불향 가득한 고소한 풍미와 중독성 있는 매운맛이 특징입니다.",
+    "ingredients": "Pork Cartilage · Gochujang · Gochugaru · Garlic · Sesame Seeds",
+    "image": "assets/uploads/1792093763290_ChatGPT_____2026__10__16_____02_47_47-8.png",
+    "frames360": [
+      "assets/uploads/1792093763290_ChatGPT_____2026__10__16_____02_47_47-8.png"
+    ],
+    "audio": "assets/audio/a3074226-0b4a-4b54-b1df-f72114944ad1.mp3",
+    "model": "assets/models/318c3d9e-2dd7-4a1e-bc8e-bf51b3526cb9.glb",
+    "soldOut": false,
+    "stock": 1
+  },
+  {
+    "id": 8,
+    "category": "DESSERTS",
+    "num": "08",
+    "name": "Cone Chips with Ice Cream",
+    "nameKo": "꼬깔콘 투게더",
+    "sub": "바삭한 고소함 위에 내려앉은 달콤한 한 스쿱",
+    "desc": "바삭하고 짭조름한 꼬깔콘 위에 부드러운 투게더 바닐라 아이스크림을 살포시 얹었습니다. 달콤함과 고소함, 차가움과 바삭함이 어우러지는 이색 디저트입니다.",
+    "ingredients": "SEASONAL INGREDIENTS · SPECIAL SAUCE",
+    "image": "assets/uploads/1792093916249___________________________.png",
+    "frames360": [
+      "assets/uploads/1792093916249___________________________.png"
+    ],
+    "audio": "assets/audio/83dd4dc6-65f4-42cf-89c9-5761de2b5a4a.mp3",
+    "model": "assets/models/b5702a1a-8722-48bf-830a-dc9779b05842.glb",
+    "soldOut": false,
+    "stock": 2
+  },
+  {
+    "id": 9,
+    "category": "DESSERTS",
+    "num": "09",
+    "name": "Velvety Kabocha Squash Soup",
+    "nameKo": "단호박 스프",
+    "sub": "단호박의 깊은 달콤함을 담은 한 그릇",
+    "desc": "잘 익은 단호박을 곱게 갈아 생크림과 함께 부드럽게 끓여냈습니다. 단호박 본연의 은은한 단맛과 깊고 고소한 풍미가 어우러지는 따뜻한 스프입니다.",
+    "ingredients": "Kabocha Squash · Fresh Cream · Butter · Pumpkin Seeds",
+    "image": "assets/uploads/1792093960019_ChatGPT_____2026__10__16_____03_54_27-1.png",
+    "frames360": [
+      "assets/uploads/1792093960019_ChatGPT_____2026__10__16_____03_54_27-1.png"
+    ],
+    "audio": "assets/audio/e4bf2bce-aa6d-4f40-97b6-cc8938e3876f.mp3",
+    "model": "assets/models/6dc82e26-ceff-4c1e-b2b0-5d1479231668.glb",
+    "soldOut": false,
+    "stock": 6
+  },
+  {
+    "id": 10,
+    "category": "MAINS",
+    "num": "10",
+    "name": "Seared Scallops with Yuzu Butter",
+    "nameKo": "유자버터 관자구이",
+    "sub": "Seared Scallops with Yuzu Butter",
+    "desc": "정성을 다해 준비한 특별한 요리입니다.",
+    "ingredients": "SEASONAL INGREDIENTS · SPECIAL SAUCE",
+    "image": "assets/uploads/1792095291300_ChatGPT_____2026__10__16_____03_54_28-2.png",
+    "frames360": [
+      "assets/uploads/1792095291300_ChatGPT_____2026__10__16_____03_54_28-2.png"
+    ],
+    "audio": "assets/audio/dish_10.mp3",
+    "stock": 10,
+    "soldOut": true,
+    "model": ""
+  },
+  {
+    "id": 11,
+    "category": "MAINS",
+    "num": "11",
+    "name": "Butter-Roasted Lobster",
+    "nameKo": "랍스터 버터구이",
+    "sub": "Butter-Roasted Lobster",
+    "desc": "정성을 다해 준비한 특별한 요리입니다.",
+    "ingredients": "SEASONAL INGREDIENTS · SPECIAL SAUCE",
+    "image": "assets/uploads/1792095326163_ChatGPT_____2026__10__16_____03_55_31.png",
+    "frames360": [
+      "assets/uploads/1792095326163_ChatGPT_____2026__10__16_____03_55_31.png"
+    ],
+    "audio": "assets/audio/dish_11.mp3",
+    "stock": 10,
+    "soldOut": true,
+    "model": ""
+  },
+  {
+    "id": 12,
+    "category": "MAINS",
+    "num": "12",
+    "name": "Steamed Egg with Caviar",
+    "nameKo": "캐비어 계란찜",
+    "sub": "Steamed Egg with Caviar",
+    "desc": "정성을 다해 준비한 특별한 요리입니다.",
+    "ingredients": "SEASONAL INGREDIENTS · SPECIAL SAUCE",
+    "image": "assets/uploads/1792095336505_ChatGPT_____2026__10__16_____03_55_36.png",
+    "frames360": [
+      "assets/uploads/1792095336505_ChatGPT_____2026__10__16_____03_55_36.png"
+    ],
+    "audio": "assets/audio/dish_12.mp3",
+    "stock": 10,
+    "soldOut": true,
+    "model": ""
+  },
+  {
+    "id": 13,
+    "category": "MAINS",
+    "num": "13",
+    "name": "Truffle Cream Pasta",
+    "nameKo": "트러플 크림 파스타",
+    "sub": "Truffle Cream Pasta",
+    "desc": "정성을 다해 준비한 특별한 요리입니다.",
+    "ingredients": "SEASONAL INGREDIENTS · SPECIAL SAUCE",
+    "image": "assets/uploads/1792095350822_ChatGPT_____2026__10__16_____03_54_30-3.png",
+    "frames360": [
+      "assets/uploads/1792095350822_ChatGPT_____2026__10__16_____03_54_30-3.png"
+    ],
+    "audio": "assets/audio/dish_13.mp3",
+    "stock": 10,
+    "soldOut": true,
+    "model": ""
+  },
+  {
+    "id": 14,
+    "category": "DRINKS",
+    "num": "14",
+    "name": "Chilled Fresh Milk",
+    "nameKo": "우유",
+    "sub": "부드럽고 순수한 한 잔의 여유",
+    "desc": "신선한 우유를 시원하게 담아냈습니다. 부드러운 질감과 은은한 고소함이 입안을 편안하게 감싸는 클래식한 음료입니다.",
+    "ingredients": "Milk",
+    "image": "assets/uploads/1792095924883_ChatGPT_____2026__10__16_____05_16_16-2.png",
+    "frames360": [
+      "assets/uploads/1792095924883_ChatGPT_____2026__10__16_____05_16_16-2.png"
+    ],
+    "audio": "assets/audio/32af60b5-b780-413b-a0ba-4558674657ee.mp3",
+    "stock": 10,
+    "soldOut": false,
+    "model": "assets/models/63ac7632-ec4c-4ee4-a91b-6fce9237920d.glb"
+  },
+  {
+    "id": 15,
+    "category": "DRINKS",
+    "num": "15",
+    "name": "Classic Iced Cola",
+    "nameKo": "콜라",
+    "sub": "청량한 탄산이 선사하는 상쾌한 순간",
+    "desc": "풍부한 탄산과 달콤한 풍미가 어우러지는 콜라를 차가운 얼음과 함께 제공합니다. 시원한 청량감이 식사의 풍미를 더욱 산뜻하게 완성합니다.",
+    "ingredients": "Carbonated Water · Sugar · Caramel Color · Flavorings",
+    "image": "assets/uploads/1792095993099_ChatGPT_____2026__10__16_____05_16_16-1.png",
+    "frames360": [
+      "assets/uploads/1792095993099_ChatGPT_____2026__10__16_____05_16_16-1.png"
+    ],
+    "audio": "assets/audio/3fb2d128-4dca-4cde-bdff-79b7ecbb6a00.mp3",
+    "stock": 10,
+    "soldOut": false,
+    "model": "assets/models/270b7935-e8de-45ca-aee3-afe611c3355a.glb"
+  }
+]

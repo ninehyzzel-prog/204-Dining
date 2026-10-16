@@ -1,0 +1,16 @@
+{
+  "name": "204 DINING",
+  "short_name": "204 DINING",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f4efe5",
+  "theme_color": "#70212b",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "assets/plate.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}

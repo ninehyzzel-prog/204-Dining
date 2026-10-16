@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/api/dishes", "destination": "/dishes.json" },
+    { "source": "/api/audio-settings", "destination": "/audio-settings.json" }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "204-dining-ipad-menu",
+  "version": "1.0.0",
+  "description": "204 DINING - Private Fine Dining Housewarming iPad Menu System",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "generate-audio": "python generate_audio.py"
+  },
+  "keywords": ["ipad", "menu", "3d", "threejs", "audio", "fine-dining"],
+  "author": "204 Dining",
+  "license": "ISC"
+}

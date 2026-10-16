@@ -1,0 +1,434 @@
+[
+  {
+    "notificationId": "c11458ea-1f34-47dd-ac39-1550dc61b290",
+    "orderId": "#204-1016-48",
+    "timestamp": "2026-10-16T03:37:01.781Z",
+    "items": [
+      {
+        "id": 4,
+        "num": "04",
+        "name": "Duck & Mushroom Hot Pot",
+        "nameKo": "오리전골",
+        "qty": 1
+      }
+    ],
+    "totalQty": 1,
+    "table": "A-3"
+  },
+  {
+    "notificationId": "6a998e85-576b-4567-a5d9-af4ffb3db798",
+    "orderId": "#204-1016-59",
+    "timestamp": "2026-10-16T03:36:54.989Z",
+    "items": [
+      {
+        "id": 4,
+        "num": "04",
+        "name": "Duck & Mushroom Hot Pot",
+        "nameKo": "오리전골",
+        "qty": 1
+      }
+    ],
+    "totalQty": 1,
+    "table": "A-3"
+  },
+  {
+    "notificationId": "aee7421c-c741-4b7e-a7bd-33e12008d853",
+    "orderId": "#204-1016-22",
+    "timestamp": "2026-10-16T03:36:47.107Z",
+    "items": [
+      {
+        "id": 4,
+        "num": "04",
+        "name": "Duck & Mushroom Hot Pot",
+        "nameKo": "오리전골",
+        "qty": 1
+      }
+    ],
+    "totalQty": 1,
+    "table": "A-3"
+  },
+  {
+    "notificationId": "ff697752-baf4-416d-a11c-00533b8cc3c6",
+    "orderId": "#204-1016-31",
+    "timestamp": "2026-10-16T03:36:38.823Z",
+    "items": [
+      {
+        "id": "2",
+        "num": "02",
+        "name": "Seaweed Soup with Striploin",
+        "nameKo": "채끝살 스테이크 미역국",
+        "qty": 6
+      },
+      {
+        "id": "15",
+        "num": "15",
+        "name": "Classic Iced Cola",
+        "nameKo": "콜라",
+        "qty": 6
+      }
+    ],
+    "totalQty": 12,
+    "table": "A-3"
+  },
+  {
+    "orderId": "#204-1016-99",
+    "timestamp": "2026-10-16T03:23:50.533Z",
+    "items": [
+      {
+        "id": "5",
+        "num": "05",
+        "name": "Japchae — Stir-Fried Glass Noodles",
+        "nameKo": "잡채",
+        "qty": 1
+      },
+      {
+        "id": "6",
+        "num": "06",
+        "name": "Spicy Tofu & Tuna Stew",
+        "nameKo": "두부참치짜글이",
+        "qty": 1
+      },
+      {
+        "id": "14",
+        "num": "14",
+        "name": "Chilled Fresh Milk",
+        "nameKo": "우유",
+        "qty": 7
+      }
+    ],
+    "totalQty": 0,
+    "table": "A-3"
+  },
+  {
+    "orderId": "#204-1016-71",
+    "timestamp": "2026-10-15T21:42:46.433Z",
+    "items": [
+      {
+        "id": "2",
+        "num": "02",
+        "name": "Seaweed Soup with Striploin",
+        "nameKo": "채끝살 스테이크 미역국",
+        "qty": 4
+      }
+    ],
+    "totalQty": 0,
+    "table": "A-3"
+  },
+  {
+    "orderId": "#204-1016-19",
+    "timestamp": "2026-10-15T21:21:17.285Z",
+    "items": [
+      {
+        "id": "5",
+        "num": "05",
+        "name": "Japchae — Stir-Fried Glass Noodles",
+        "nameKo": "잡채",
+        "qty": 1
+      }
+    ],
+    "totalQty": 0,
+    "table": "A-3"
+  },
+  {
+    "orderId": "#204-1016-58",
+    "timestamp": "2026-10-15T21:07:06.210Z",
+    "items": [
+      {
+        "id": "2",
+        "num": "02",
+        "name": "Seaweed Soup with Medium-Rare Striploin",
+        "nameKo": "채끝살 스테이크 미역국",
+        "qty": 4
+      },
+      {
+        "id": "3",
+        "num": "03",
+        "name": "Chilled Sliced Pork",
+        "nameKo": "냉수육",
+        "qty": 1
+      }
+    ],
+    "totalQty": 0,
+    "table": "A-3"
+  },
+  {
+    "orderId": "#204-1016-74",
+    "timestamp": "2026-10-15T21:05:49.424Z",
+    "items": [
+      {
+        "id": 4,
+        "num": "04",
+        "name": "Duck & Mushroom Hot Pot",
+        "nameKo": "오리전골",
+        "qty": 1
+      }
+    ],
+    "totalQty": 0,
+    "table": "A-3"
+  },
+  {
+    "orderId": "#204-1016-86",
+    "timestamp": "2026-10-15T21:05:28.218Z",
+    "items": [
+      {
+        "id": 4,
+        "num": "04",
+        "name": "Duck & Mushroom Hot Pot",
+        "nameKo": "오리전골",
+        "qty": 1
+      }
+    ],
+    "totalQty": 0,
+    "table": "A-3"
+  },
+  {
+    "orderId": "#204-1016-55",
+    "timestamp": "2026-10-15T21:05:21.998Z",
+    "items": [
+      {
+        "id": 4,
+        "num": "04",
+        "name": "Duck & Mushroom Hot Pot",
+        "nameKo": "오리전골",
+        "qty": 1
+      }
+    ],
+    "totalQty": 0,
+    "table": "A-3"
+  },
+  {
+    "orderId": "#204-1016-92",
+    "timestamp": "2026-10-15T20:48:08.534Z",
+    "items": [
+      {
+        "id": 4,
+        "num": "04",
+        "name": "Duck & Mushroom Hot Pot",
+        "nameKo": "오리전골",
+        "qty": 1
+      }
+    ],
+    "totalQty": 0,
+    "table": "A-3"
+  },
+  {
+    "orderId": "#204-1016-36",
+    "timestamp": "2026-10-15T20:47:49.380Z",
+    "items": [
+      {
+        "id": 4,
+        "num": "04",
+        "name": "Duck & Mushroom Hot Pot",
+        "nameKo": "오리전골",
+        "qty": 1
+      }
+    ],
+    "totalQty": 0,
+    "table": "A-3"
+  },
+  {
+    "orderId": "#204-1016-30",
+    "timestamp": "2026-10-15T20:42:32.800Z",
+    "items": [
+      {
+        "id": 4,
+        "num": "04",
+        "name": "Duck & Mushroom Hot Pot",
+        "nameKo": "오리전골",
+        "qty": 1
+      }
+    ],
+    "totalQty": 0,
+    "table": "A-3"
+  },
+  {
+    "orderId": "#204-1016-33",
+    "timestamp": "2026-10-15T20:42:23.152Z",
+    "items": [
+      {
+        "id": "2",
+        "num": "02",
+        "name": "Seaweed Soup with Medium-Rare Striploin",
+        "nameKo": "채끝살 스테이크 미역국",
+        "qty": 2
+      }
+    ],
+    "totalQty": 0,
+    "table": "A-3"
+  },
+  {
+    "orderId": "#204-1016-92",
+    "timestamp": "2026-10-15T20:10:25.625Z",
+    "items": [
+      {
+        "id": 4,
+        "num": "04",
+        "name": "Duck & Mushroom Hot Pot",
+        "nameKo": "오리전골",
+        "qty": 1
+      }
+    ],
+    "totalQty": 0,
+    "table": "A-3"
+  },
+  {
+    "orderId": "#204-1016-13",
+    "timestamp": "2026-10-15T19:54:52.354Z",
+    "items": [
+      {
+        "id": "5",
+        "num": "05",
+        "name": "Japchae — Stir-Fried Glass Noodles",
+        "nameKo": "잡채",
+        "qty": 2
+      },
+      {
+        "id": "6",
+        "num": "06",
+        "name": "Spicy Tofu & Tuna Stew",
+        "nameKo": "두부참치짜글이",
+        "qty": 6
+      }
+    ],
+    "totalQty": 0,
+    "table": "A-3"
+  },
+  {
+    "orderId": "#204-1016-66",
+    "timestamp": "2026-10-15T18:43:28.448Z",
+    "items": [
+      {
+        "id": 4,
+        "num": "04",
+        "name": "Hanwoo Tenderloin",
+        "nameKo": "한우 안심과 트러플",
+        "qty": 1
+      }
+    ],
+    "totalQty": 0,
+    "table": "A-3"
+  },
+  {
+    "orderId": "#204-1016-74",
+    "timestamp": "2026-10-15T18:43:18.772Z",
+    "items": [
+      {
+        "id": "2",
+        "num": "02",
+        "name": "Foie Gras",
+        "nameKo": "푸아그라와 브리오슈",
+        "qty": 1
+      }
+    ],
+    "totalQty": 0,
+    "table": "A-3"
+  },
+  {
+    "orderId": "#204-1016-67",
+    "timestamp": "2026-10-15T18:43:04.982Z",
+    "items": [
+      {
+        "id": 4,
+        "num": "04",
+        "name": "Hanwoo Tenderloin",
+        "nameKo": "한우 안심과 트러플",
+        "qty": 1
+      }
+    ],
+    "totalQty": 0,
+    "table": "A-3"
+  },
+  {
+    "orderId": "#204-1016-29",
+    "timestamp": "2026-10-15T18:42:51.944Z",
+    "items": [
+      {
+        "id": 4,
+        "num": "04",
+        "name": "Hanwoo Tenderloin",
+        "nameKo": "한우 안심과 트러플",
+        "qty": 1
+      }
+    ],
+    "totalQty": 0,
+    "table": "A-3"
+  },
+  {
+    "orderId": "#204-1016-67",
+    "timestamp": "2026-10-15T18:42:39.219Z",
+    "items": [
+      {
+        "id": 4,
+        "num": "04",
+        "name": "Hanwoo Tenderloin",
+        "nameKo": "한우 안심과 트러플",
+        "qty": 1
+      }
+    ],
+    "totalQty": 0,
+    "table": "A-3"
+  },
+  {
+    "orderId": "#204-1016-80",
+    "timestamp": "2026-10-15T18:38:14.217Z",
+    "items": [
+      {
+        "id": "4",
+        "num": "04",
+        "name": "Hanwoo Tenderloin",
+        "nameKo": "한우 안심과 트러플",
+        "qty": 1
+      }
+    ],
+    "totalQty": 0,
+    "table": "A-3"
+  },
+  {
+    "orderId": "#204-1016-33",
+    "timestamp": "2026-10-15T18:37:49.635Z",
+    "items": [
+      {
+        "id": "4",
+        "num": "04",
+        "name": "Hanwoo Tenderloin",
+        "nameKo": "한우 안심과 트러플",
+        "qty": 1
+      }
+    ],
+    "totalQty": 0,
+    "table": "A-3"
+  },
+  {
+    "orderId": "#204-1016-44",
+    "timestamp": "2026-10-15T18:35:23.524Z",
+    "items": [
+      {
+        "id": "4",
+        "num": "04",
+        "name": "Hanwoo Tenderloin",
+        "nameKo": "한우 안심과 트러플",
+        "qty": 1
+      }
+    ],
+    "totalQty": 0,
+    "table": "A-3"
+  },
+  {
+    "orderId": "#204-1030-01",
+    "timestamp": "2026-10-15T18:18:23.850Z",
+    "items": [
+      {
+        "num": "04",
+        "name": "Hanwoo Tenderloin",
+        "qty": 2
+      },
+      {
+        "num": "01",
+        "name": "Hokkaido Scallop",
+        "qty": 1
+      }
+    ],
+    "totalQty": 3,
+    "table": "A-3"
+  }
+]

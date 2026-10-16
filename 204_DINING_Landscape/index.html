@@ -1,0 +1,3933 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="204 DINING">
+  <link rel="manifest" href="manifest.json">
+  <title>204 DINING | An Intimate Private Dining Experience</title>
+  
+  <!-- High-End Serif Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Noto+Serif+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --wine: #70212b;
+      --wine-dark: #52151d;
+      --wine-light: #8e323d;
+      --gold: #e5c3a6;
+      --gold-light: #f3dfcd;
+      --ink: #302724;
+      --muted: #8c7b70;
+      --paper: #f4efe5;
+      --paper-warm: #ece6dc;
+      --paper-card: #ede8dc;
+      --line: #c8b9a9;
+      --line-subtle: #dbcfc2;
+      --font-en: 'Cormorant Garamond', 'EB Garamond', serif;
+      --font-ko: 'Noto Serif KR', serif;
+      --ease-luxury: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100vw;
+      max-width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      overflow-x: hidden !important;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--font-en);
+      -webkit-font-smoothing: antialiased;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    /* 100% Edge-to-Edge Fluid Fullscreen Stage */
+    #app-stage {
+      position: absolute;
+      inset: 0;
+      width: 100vw;
+      max-width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      overflow-x: hidden !important;
+      background: var(--paper);
+    }
+
+    /* Paper texture & subtle vignette */
+    #app-stage::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0.72;
+      background: radial-gradient(ellipse at 42% 18%, rgba(255,255,255,0.72), transparent 64%),
+                  linear-gradient(105deg, rgba(116,90,65,0.03) 0%, transparent 58%, rgba(123,91,61,0.035) 100%);
+    }
+    #app-stage::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 2;
+      opacity: 0.12;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.84' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.18'/%3E%3C/svg%3E");
+    }
+
+    button { font: inherit; cursor: pointer; border: none; outline: none; }
+    .serif { font-family: var(--font-en); }
+    .ko { font-family: var(--font-ko); letter-spacing: -0.02em; }
+    
+    /* Responsive Global Header */
+    .page-header {
+      position: absolute;
+      z-index: 30;
+      left: clamp(28px, 4.5vw, 75px);
+      right: clamp(28px, 4.5vw, 75px);
+      top: clamp(20px, 3.8vh, 45px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: clamp(18px, 2.2vw, 23px);
+      font-weight: 500;
+      letter-spacing: 0.17em;
+    }
+    .page-header .brand-title {
+      font-size: clamp(20px, 2.4vw, 25px);
+      letter-spacing: 0.16em;
+      cursor: pointer;
+      transition: color 0.25s var(--ease-luxury);
+    }
+    .page-header .brand-title:hover { color: var(--wine); }
+
+    .page-header .controls-wrap {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .page-header .edition {
+      font-size: clamp(11px, 1.3vw, 13px);
+      letter-spacing: 0.25em;
+      color: var(--wine);
+      text-transform: uppercase;
+      margin-left: 10px;
+    }
+    
+    /* Top Audio & BGM Controller Badges */
+    .ctrl-pill {
+      background: rgba(244, 239, 229, 0.75);
+      border: 1px solid rgba(112, 33, 43, 0.35);
+      color: var(--wine);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      padding: 6px 14px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      transition: all 0.3s var(--ease-luxury);
+      font-family: var(--font-ko);
+      cursor: pointer;
+    }
+    .ctrl-pill:hover {
+      background: rgba(112, 33, 43, 0.08);
+      border-color: var(--wine);
+    }
+    .ctrl-pill.active {
+      background: var(--wine);
+      color: #fff;
+      border-color: var(--wine);
+      box-shadow: 0 4px 14px rgba(112, 33, 43, 0.22);
+    }
+    .sound-pulse {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      background: currentColor;
+      border-radius: 50%;
+      animation: pulse 1.4s infinite ease-in-out;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.4; transform: scale(0.85); }
+      50% { opacity: 1; transform: scale(1.2); }
+    }
+
+    /* Responsive Global Footer */
+    .footer {
+      position: absolute;
+      z-index: 30;
+      left: clamp(28px, 4.5vw, 75px);
+      right: clamp(28px, 4.5vw, 75px);
+      bottom: clamp(18px, 3.4vh, 42px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: clamp(12px, 1.4vw, 14px);
+      letter-spacing: 0.20em;
+      color: #7f7067;
+    }
+    .footer .count {
+      color: var(--wine);
+      font-size: clamp(18px, 2vw, 22px);
+      font-feature-settings: "tnum";
+    }
+    .divider { height: 1px; background: var(--line); }
+    .artline { height: 1px; background: #a15d59; }
+
+    .btn {
+      background: var(--wine);
+      color: #fcf8ee;
+      padding: clamp(14px, 2vh, 20px) clamp(28px, 3.5vw, 42px);
+      border: 1px solid var(--wine);
+      font-size: clamp(16px, 1.8vw, 19px);
+      letter-spacing: 0.08em;
+      min-width: clamp(180px, 20vw, 230px);
+      transition: all 0.25s var(--ease-luxury);
+      box-shadow: 0 4px 15px rgba(112, 33, 43, 0.15);
+      border-radius: 2px;
+    }
+    .btn:hover {
+      background: var(--wine-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(112, 33, 43, 0.24);
+    }
+    .btn:active {
+      transform: translateY(1px) scale(0.98);
+      box-shadow: 0 2px 8px rgba(112, 33, 43, 0.2);
+    }
+    .btn.line {
+      border: 0;
+      border-bottom: 1px solid var(--wine);
+      background: transparent;
+      color: var(--wine);
+      padding: 10px 0;
+      min-width: 0;
+      box-shadow: none;
+      transition: all 0.2s var(--ease-luxury);
+    }
+    .btn.line:hover {
+      letter-spacing: 0.12em;
+      border-bottom-width: 2px;
+    }
+
+    /* Screen Container & Velvet Edge-to-Edge Transitions (셰프소개 스타일 실크 벨벳 트랜지션) */
+    .screen {
+      position: absolute;
+      inset: 0;
+      width: 100vw;
+      max-width: 100vw;
+      height: 100vh;
+      z-index: 5;
+      display: none;
+      opacity: 0;
+      pointer-events: none;
+      overflow-x: hidden !important;
+      transform: scale(0.99) translateY(6px);
+      transition: opacity 0.42s cubic-bezier(0.22, 1, 0.36, 1), transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: opacity, transform;
+    }
+    .screen.active {
+      display: block;
+      opacity: 1;
+      transform: scale(1) translateY(0);
+      pointer-events: auto;
+    }
+    .screen.exit {
+      display: block;
+      opacity: 0;
+      transform: scale(0.985) translateY(-6px);
+      pointer-events: none;
+      transition: opacity 0.3s ease-in, transform 0.3s ease-in;
+    }
+    
+
+    /* Silk Velvet Ambient Gradient Veil during Page Transitions */
+    .screen-veil {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      background: radial-gradient(ellipse at 50% 50%, rgba(20, 3, 6, 0.38) 0%, rgba(12, 1, 3, 0.78) 100%);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 55;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: opacity;
+    }
+    .screen-veil.active {
+      opacity: 1;
+    }
+    .screen-blur {
+      position: fixed;
+      width: 100%;
+      height: 176px;
+      top: 0;
+      left: 0;
+      z-index: 2;
+      background: var(--gray-200);
+      display: flex;
+      justify-content: center;
+      gap: var(--spacing-xs);
+      padding: 12px var(--spacing-s);
+    }
+    .screen-blur:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        backdrop-filter: blur(20px);
+        background: linear-gradient(to top, rgba(255, 255, 255, 0.45) 50%, transparent 100%);
+        mask-image: linear-gradient(to top, rgb(0, 0, 0) 30%, transparent 100%);
+    }
+
+    /* ========================================================
+    /* ========================================================
+       01. WELCOME SCREEN — INTERACTIVE VELVET ENVELOPE & TRAY
+       (미쉐린 3스타급 절제된 품격의 인터랙티브 초대장)
+       ======================================================== */
+    .welcome {
+      position: absolute;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      cursor: pointer;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    /* Fullscreen Damask Burgundy Background */
+    .welcome-damask-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #2b0308;
+      background-image: url('assets/welcome/DamaskBackground.webp'), url('assets/welcome/DamaskBackground.png');
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      z-index: 1;
+      pointer-events: none;
+      transition: filter 0.8s var(--ease-luxury), opacity 0.8s var(--ease-luxury);
+    }
+    .welcome-damask-bg::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 48%, rgba(20, 2, 5, 0.05) 30%, rgba(15, 1, 3, 0.45) 80%, rgba(6, 0, 1, 0.75) 100%);
+      pointer-events: none;
+    }
+
+    /* Welcome Header Bar */
+    .welcome-header {
+      position: absolute;
+      top: clamp(20px, 3.8vh, 42px);
+      left: clamp(28px, 4.5vw, 65px);
+      right: clamp(28px, 4.5vw, 65px);
+      z-index: 25;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      pointer-events: auto;
+    }
+    .welcome-header .brand-title {
+      font-size: clamp(19px, 2.2vw, 24px);
+      letter-spacing: 0.22em;
+      color: rgba(244, 239, 229, 0.88);
+      font-weight: 400;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+      transition: color 0.3s ease;
+    }
+    .welcome-header .brand-title:hover {
+      color: #fff;
+    }
+    .welcome-header .controls-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      display: none;
+    }
+    .welcome-header .ctrl-pill {
+      background: rgba(30, 4, 8, 0.65);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(229, 195, 166, 0.35);
+      color: #f4efe5;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      padding: 6px 14px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      transition: all 0.25s var(--ease-luxury);
+      font-family: var(--font-ko);
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    }
+    .welcome-header .ctrl-pill:hover {
+      background: rgba(112, 33, 43, 0.8);
+      border-color: rgba(229, 195, 166, 0.6);
+    }
+    .welcome-header .ctrl-pill.active {
+      background: rgba(112, 33, 43, 0.85);
+      border-color: #e5c3a6;
+      color: #fff;
+      box-shadow: 0 4px 15px rgba(112, 33, 43, 0.4);
+    }
+
+    /* Centerpiece Stage (Tray + Envelope Back + Card + Envelope Front) */
+    .welcome-centerpiece-stage {
+      position: absolute;
+      left: 49%;
+      top: 48%;
+      transform: translate(-50%, -50%);
+      width: clamp(450px, 78vh, 790px);
+      height: clamp(450px, 78vh, 790px);
+      max-width: 72vw;
+      aspect-ratio: 1 / 1;
+      z-index: 5;
+      pointer-events: none;
+      transition: transform 0.95s cubic-bezier(0.22, 1, 0.36, 1), filter 0.95s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.95s cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: transform, opacity, filter;
+    }
+
+    /* Common layer positioning inside centerpiece */
+    .welcome-tray-pic,
+    .welcome-env-back-pic,
+    .welcome-env-front-pic {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    .welcome-tray-img,
+    .welcome-env-back-img,
+    .welcome-env-front-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      pointer-events: none;
+      display: block;
+    }
+
+    /* Layer 1: Silver Tray */
+    .welcome-tray-pic {
+      z-index: 2;
+    }
+    .welcome-tray-img {
+      filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.65));
+    }
+
+    /* Layer 2: Envelope Back & Open Flap */
+    .welcome-env-back-pic {
+      z-index: 3;
+    }
+    .welcome-env-back-img {
+      filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.4));
+    }
+
+    /* Layer 3: Ivory Invitation Card (Between Back & Front) */
+    .welcome-card-wrapper {
+      position: absolute;
+      left: 50%;
+      top: 17.5%;
+      width: 69.5%;
+      height: 52.3%;
+      transform: translateX(-50%) translateY(0) scale(1);
+      z-index: 4;
+      pointer-events: none;
+      transition: transform 0.95s cubic-bezier(0.22, 1, 0.36, 1), filter 0.95s cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: transform, filter;
+    }
+    .welcome-card-pic {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .welcome-card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.35));
+      transition: filter 0.95s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* Layer 4: Envelope Front Pocket (V notch in front of card) */
+    .welcome-env-front-pic {
+      z-index: 5;
+    }
+    .welcome-env-front-img {
+      filter: drop-shadow(0 12px 25px rgba(0, 0, 0, 0.35));
+    }
+
+    /* Right: Chef Portrait Frame (Independent Touch Point) */
+    .welcome-chef-frame {
+      position: absolute;
+      right: clamp(26px, 5.5vw, 85px);
+      bottom: clamp(32px, 6.5vh, 85px);
+      width: clamp(125px, 14.5vw, 185px);
+      aspect-ratio: 952 / 1388;
+      z-index: 15;
+      cursor: pointer;
+      pointer-events: auto;
+      transform-origin: center center;
+      transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), filter 0.22s ease, opacity 0.6s var(--ease-luxury);
+      will-change: transform;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .welcome-chef-frame:active {
+      transform: scale(0.95);
+      filter: brightness(1.12);
+    }
+    .welcome-chef-pic {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .welcome-chef-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.7));
+      pointer-events: none;
+    }
+
+    /* Bottom: Entrance Ornament ("TOUCH ANYWHERE TO ENTER") */
+    .welcome-entrance-orn {
+      position: absolute;
+      left: 50%;
+      bottom: clamp(22px, 4.2vh, 48px);
+      transform: translateX(-50%) translateY(0);
+      width: clamp(270px, 34vw, 440px);
+      aspect-ratio: 2060 / 167;
+      z-index: 12;
+      pointer-events: none;
+      transition: opacity 0.3s cubic-bezier(0.22, 1, 0.36, 1), transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: opacity, transform;
+    }
+    .welcome-orn-pic {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .welcome-orn-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.8));
+      pointer-events: none;
+    }
+
+    /* ========================================================
+       OPENING SEQUENCE ANIMATION STYLES (모션 B)
+       ======================================================== */
+    /* 1. Entrance text disappears quietly */
+    .welcome.opening .welcome-entrance-orn,
+    .welcome.opening .welcome-chef-frame {
+      opacity: 0;
+      transform: scale(0.96) translateY(6px);
+      pointer-events: none;
+    }
+
+    /* 2. Invitation card glides up vertically and scales smoothly to center focus */
+    .welcome.opening .welcome-card-wrapper {
+      transform: translateX(-50%) translateY(calc(-14vh)) scale(1.24);
+      z-index: 10;
+    }
+    .welcome.opening .welcome-card-img {
+      filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.75));
+    }
+
+    /* 3. Silver tray & envelope gently soften / dim into background */
+    .welcome.opening .welcome-tray-pic,
+    .welcome.opening .welcome-env-back-pic,
+    .welcome.opening .welcome-env-front-pic {
+      opacity: 0.35;
+      filter: blur(4px);
+      transition: opacity 0.95s cubic-bezier(0.22, 1, 0.36, 1), filter 0.95s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* Reduced Motion Accessibility */
+    @media (prefers-reduced-motion: reduce) {
+      .welcome-centerpiece-stage,
+      .welcome-card-wrapper,
+      .welcome-entrance-orn,
+      .welcome-chef-frame {
+        transition-duration: 0.2s !important;
+      }
+      .welcome.opening .welcome-card-wrapper {
+        transform: translateX(-50%) translateY(0) scale(1) !important;
+      }
+    }
+
+    /* ========================================================
+       02. MEET THE CHEF: ELEVATED VELVET GRADIENT OVERLAY
+       (대기화면 위에 부드러운 그라디언트가 깔리며 우아하게 등장)
+       ======================================================== */
+    /* ========================================================
+       02. MEET THE CHEF: ELEVATED FINE-DINING CHEF PROFILE
+       (1:1 아이보리 앤티크 종이 질감 & 골드 타원 액자 인터랙션)
+       ======================================================== */
+    .screen.chef-screen {
+      position: absolute;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 60;
+      display: none;
+      opacity: 0;
+      pointer-events: none;
+      overflow: hidden;
+      user-select: none;
+      -webkit-user-select: none;
+      transition: opacity 0.35s ease-out, transform 0.35s var(--ease-luxury);
+    }
+    .screen.chef-screen.active {
+      display: block;
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .screen.chef-screen.exit {
+      opacity: 0;
+      transform: scale(0.99);
+      transition: opacity 0.3s ease-in, transform 0.3s ease-in;
+    }
+
+    /* Fullscreen Ivory Background Paper with Texture & Border */
+    .chef-bg-paper {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #f5f0e6;
+      background-image: url('assets/intro/BackgroundPaper.webp'), url('assets/intro/BackgroundPaper.png');
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* Close 'X' Button on Top Right */
+    .chef-close-btn {
+      position: absolute;
+      right: clamp(20px, 3.2vw, 42px);
+      top: clamp(16px, 2.8vh, 32px);
+      color: #8c735d;
+      font-size: clamp(28px, 3.4vw, 38px);
+      line-height: 1;
+      cursor: pointer;
+      z-index: 80;
+      background: transparent;
+      border: none;
+      transition: transform 0.25s var(--ease-luxury), color 0.25s ease;
+      min-width: 44px;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .chef-close-btn:hover {
+      color: #621f27;
+      transform: rotate(90deg) scale(1.1);
+    }
+    .chef-close-btn:active {
+      transform: scale(0.95);
+    }
+
+    /* Two-Column Stage Container (Left ~52%, Right ~48%) */
+    .chef-stage-container {
+      position: absolute;
+      inset: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      padding: clamp(25px, 4vh, 50px) clamp(28px, 4.5vw, 68px);
+      box-sizing: border-box;
+      gap: clamp(15px, 2.5vw, 40px);
+    }
+
+    /* Left Column: Antique Gold Oval Frame + Grayscale Portrait */
+    .chef-portrait-stage {
+      flex: 0 0 clamp(350px, 47vw, 560px);
+      max-width: 52%;
+      height: 100%;
+      max-height: calc(100vh - clamp(50px, 7vh, 85px));
+      aspect-ratio: 1 / 1;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
+      cursor: pointer;
+    }
+
+    /* Layer 1: Chef Grayscale Portrait (Under Frame) */
+    .chef-portrait-pic {
+      position: absolute;
+      left: 49.8%;
+      top: 50.9%;
+      transform: translate(-50%, -50%) translateY(12px);
+      width: 53.5%;
+      height: 66.8%;
+      z-index: 2;
+      opacity: 0;
+      transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1), transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: opacity, transform;
+    }
+    .chef-screen.step-portrait .chef-portrait-pic {
+      opacity: 1;
+      transform: translate(-50%, -50%) translateY(0);
+    }
+    .chef-portrait-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      clip-path: ellipse(48.5% 49% at 50% 50%);
+      -webkit-clip-path: ellipse(48.5% 49% at 50% 50%);
+      filter: contrast(1.05) brightness(0.98);
+      transition: transform 0.4s var(--ease-luxury);
+    }
+
+    /* Layer 2: Gold Oval Frame (Over Portrait) */
+    .chef-frame-pic {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 4;
+      pointer-events: none;
+      opacity: 0;
+      transform: scale(0.985);
+      transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: opacity, transform;
+    }
+    .chef-screen.step-frame .chef-frame-pic {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .chef-frame-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      filter: drop-shadow(0 18px 38px rgba(58, 30, 20, 0.42));
+      transition: transform 0.4s var(--ease-luxury);
+    }
+
+    /* Interactive Frame Reaction on Touch / Hover (Max 1.012x momentary reaction) */
+    .chef-portrait-stage:hover .chef-frame-img,
+    .chef-portrait-stage:active .chef-frame-img {
+      transform: scale(1.012);
+    }
+    .chef-portrait-stage:hover .chef-portrait-img,
+    .chef-portrait-stage:active .chef-portrait-img {
+      transform: scale(1.012);
+    }
+
+    /* Right Column: Editorial Typography Stage */
+    .chef-content-stage {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      height: 100%;
+      padding: clamp(6px, 1vh, 16px) 0;
+    }
+
+    /* 204 DINING Top Label */
+    .chef-top-label {
+      font-family: var(--font-en);
+      font-size: clamp(12px, 1.3vw, 15px);
+      letter-spacing: 0.38em;
+      color: #8c735d;
+      margin-right: -0.38em;
+      opacity: 0;
+      transition: opacity 0.35s ease-out;
+      will-change: opacity;
+    }
+    .chef-screen.step-top .chef-top-label {
+      opacity: 1;
+    }
+
+    /* Gold Divider Ornaments */
+    .chef-divider-pic {
+      display: block;
+      width: clamp(130px, 16vw, 195px);
+      height: auto;
+      margin: clamp(4px, 0.9vh, 9px) auto;
+      opacity: 0;
+      transition: opacity 0.4s ease-out;
+      will-change: opacity;
+    }
+    .chef-divider-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      opacity: 0.82;
+    }
+    .chef-screen.step-dividers .chef-divider-pic {
+      opacity: 1;
+    }
+
+    /* Main Title: MEET THE CHEF */
+    .chef-title-wrap {
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.52s ease-out, transform 0.52s ease-out;
+      will-change: opacity, transform;
+      margin: clamp(2px, 0.5vh, 5px) 0;
+    }
+    .chef-screen.step-title .chef-title-wrap {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .chef-title {
+      font-family: var(--font-en);
+      font-weight: 400;
+      color: #621f27;
+      font-size: clamp(44px, 5.8vw, 68px);
+      line-height: 0.94;
+      letter-spacing: 0.05em;
+      margin: 0;
+      text-shadow: 0 1px 2px rgba(98, 31, 39, 0.08);
+    }
+
+    /* Chef Bio: sanggu JI / Born in 1995 */
+    .chef-bio-wrap {
+      margin: clamp(2px, 0.5vh, 5px) 0;
+      opacity: 0;
+      transition: opacity 0.45s ease-out;
+      will-change: opacity;
+    }
+    .chef-screen.step-bio .chef-bio-wrap {
+      opacity: 1;
+    }
+    .chef-name-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 10px;
+    }
+    .chef-first-name {
+      font-family: var(--font-en);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(26px, 3.4vw, 38px);
+      color: #4a3b32;
+    }
+    .chef-last-name {
+      font-family: var(--font-en);
+      font-weight: 700;
+      font-size: clamp(26px, 3.4vw, 38px);
+      color: #621f27;
+    }
+    .chef-born-text {
+      font-family: var(--font-en);
+      font-style: italic;
+      font-size: clamp(12px, 1.3vw, 14px);
+      color: #8c735d;
+      letter-spacing: 0.04em;
+      margin-top: 2px;
+    }
+
+    /* Three Star Mark & Subtitle */
+    .chef-stars-wrap {
+      margin: clamp(2px, 0.5vh, 5px) 0;
+      opacity: 0;
+      transition: opacity 0.4s ease-out;
+      will-change: opacity;
+    }
+    .chef-screen.step-stars .chef-stars-wrap {
+      opacity: 1;
+    }
+    .chef-stars-pic {
+      display: block;
+      width: clamp(70px, 8.5vw, 100px);
+      margin: 0 auto;
+    }
+    .chef-stars-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      opacity: 0.9;
+    }
+    .chef-stars-sub {
+      font-family: var(--font-en);
+      font-style: italic;
+      font-size: clamp(11px, 1.2vw, 13px);
+      color: #8c735d;
+      letter-spacing: 0.08em;
+      margin-top: 3px;
+    }
+
+    /* Bottom Logo Watermark: 204 DINING */
+    .chef-bottom-logo {
+      margin-top: clamp(2px, 0.6vh, 6px);
+      opacity: 0;
+      transition: opacity 0.4s ease-out;
+      will-change: opacity;
+    }
+    .chef-screen.step-stars .chef-bottom-logo {
+      opacity: 1;
+    }
+    .chef-bottom-num {
+      font-family: var(--font-en);
+      font-size: clamp(18px, 2.2vw, 25px);
+      color: #b5a494;
+      line-height: 1;
+      letter-spacing: 0.06em;
+    }
+    .chef-bottom-text {
+      font-family: var(--font-en);
+      font-size: clamp(8px, 1vw, 10px);
+      color: #b5a494;
+      letter-spacing: 0.35em;
+      margin-top: 2px;
+      margin-right: -0.35em;
+    }
+
+    /* Accessible Navigation Actions */
+    .chef-nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: clamp(6px, 1.2vh, 12px);
+      opacity: 0;
+      transition: opacity 0.4s ease-out;
+      will-change: opacity;
+    }
+    .chef-screen.step-stars .chef-nav-actions {
+      opacity: 1;
+    }
+    .chef-nav-btn {
+      font-family: var(--font-en);
+      font-size: clamp(11px, 1.2vw, 13px);
+      letter-spacing: 0.16em;
+      padding: clamp(6px, 1vh, 9px) clamp(15px, 1.8vw, 22px);
+      border-radius: 24px;
+      cursor: pointer;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.25s var(--ease-luxury);
+      -webkit-tap-highlight-color: transparent;
+    }
+    .chef-nav-btn.return-btn {
+      background: rgba(245, 240, 230, 0.7);
+      border: 1px solid rgba(140, 115, 93, 0.45);
+      color: #4a3b32;
+    }
+    .chef-nav-btn.return-btn:hover {
+      background: #4a3b32;
+      color: #fdfaf5;
+      border-color: #4a3b32;
+    }
+    .chef-nav-btn.menu-btn {
+      background: #621f27;
+      border: 1px solid #621f27;
+      color: #fcf8ee;
+      box-shadow: 0 4px 15px rgba(98, 31, 39, 0.25);
+    }
+    .chef-nav-btn.menu-btn:hover {
+      background: #461218;
+      border-color: #461218;
+      box-shadow: 0 6px 20px rgba(98, 31, 39, 0.35);
+      transform: translateY(-1px);
+    }
+    .chef-nav-btn:active {
+      transform: scale(0.97);
+    }
+
+    /* Accessibility / Reduced Motion */
+    @media (prefers-reduced-motion: reduce) {
+      .chef-portrait-pic,
+      .chef-frame-pic,
+      .chef-top-label,
+      .chef-title-wrap,
+      .chef-bio-wrap,
+      .chef-divider-pic,
+      .chef-stars-wrap,
+      .chef-bottom-logo,
+      .chef-nav-actions {
+        transition: none !important;
+        transform: none !important;
+        opacity: 1 !important;
+      }
+    }
+
+    /* ========================================================
+       03. MENU INDEX (FLUID RESPONSIVE & SEQUENTIAL REVEAL)
+       ======================================================== */
+    .index .screen-content {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      padding: clamp(70px, 9vh, 100px) clamp(28px, 4.5vw, 75px) clamp(55px, 6vh, 80px);
+      gap: clamp(35px, 5vw, 85px);
+    }
+    .index .page-header {
+      opacity: 0;
+      transform: translateY(-8px);
+      transition: opacity 0.45s ease-out, transform 0.45s var(--ease-luxury);
+    }
+    .index.step-header .page-header {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .index .lead {
+      flex: 0 0 clamp(320px, 34vw, 460px);
+    }
+    .index .lead .mini {
+      font-size: 14px;
+      letter-spacing: 0.24em;
+      color: var(--wine);
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.42s ease-out, transform 0.42s var(--ease-luxury);
+    }
+    .index.step-lead .lead .mini {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .index .lead h1 {
+      font-weight: 400;
+      font-size: clamp(85px, 10vw, 145px);
+      letter-spacing: -0.06em;
+      color: var(--wine);
+      line-height: 0.86;
+      margin: clamp(24px, 3.5vh, 40px) 0 clamp(20px, 3vh, 32px);
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.55s ease-out, transform 0.55s var(--ease-luxury);
+    }
+    .index.step-title .lead h1 {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .index .lead h1 em { font-style: italic; }
+    .index .lead .artline,
+    .index .lead p {
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.48s ease-out, transform 0.48s var(--ease-luxury);
+    }
+    .index.step-artline .lead .artline,
+    .index.step-artline .lead p {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .index .lead p {
+      font-family: var(--font-ko);
+      font-size: clamp(18px, 2vw, 23px);
+      line-height: 2.1;
+      color: #665c54;
+      font-weight: 300;
+      margin-top: 24px;
+    }
+    .index .red-thread {
+      width: 2px;
+      height: 70%;
+      background: #952b31;
+      opacity: 0;
+      transform: scaleY(0);
+      transform-origin: top center;
+      transition: opacity 0.5s ease-out, transform 0.65s var(--ease-luxury);
+    }
+    .index.step-thread .red-thread {
+      opacity: 0.35;
+      transform: scaleY(1);
+    }
+    .index .list {
+      flex: 1;
+    }
+    .index .line {
+      display: flex;
+      align-items: baseline;
+      border-bottom: 1px solid #aa8980;
+      padding: clamp(16px, 2.2vh, 24px) 8px;
+      gap: 20px;
+      color: var(--ink);
+      cursor: pointer;
+      opacity: 0;
+      transform: translateX(18px);
+      transition: opacity 0.42s ease-out, transform 0.42s var(--ease-luxury), padding-left 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+    }
+    .index.step-lines .list .line:nth-child(1) { transition-delay: 0.04s; opacity: 1; transform: translateX(0); }
+    .index.step-lines .list .line:nth-child(2) { transition-delay: 0.08s; opacity: 1; transform: translateX(0); }
+    .index.step-lines .list .line:nth-child(3) { transition-delay: 0.12s; opacity: 1; transform: translateX(0); }
+    .index.step-lines .list .line:nth-child(4) { transition-delay: 0.16s; opacity: 1; transform: translateX(0); }
+    .index.step-lines .list .line:nth-child(5) { transition-delay: 0.20s; opacity: 1; transform: translateX(0); }
+    .index.step-lines .list .line:nth-child(6) { transition-delay: 0.24s; opacity: 1; transform: translateX(0); }
+    .index .line:hover, .index .line:active {
+      padding-left: 16px;
+      color: var(--wine);
+      border-bottom-color: var(--wine);
+      background: rgba(112, 33, 43, 0.025);
+    }
+    .index .line .idx {
+      font-size: clamp(16px, 1.6vw, 19px);
+      letter-spacing: 0.08em;
+      color: var(--wine);
+      width: 55px;
+    }
+    .index .line .label {
+      font-size: clamp(34px, 4vw, 52px);
+      letter-spacing: 0.012em;
+      flex: 1;
+    }
+    .index .line .sub {
+      font-family: var(--font-ko);
+      font-size: clamp(14px, 1.4vw, 17px);
+      color: #7e7069;
+    }
+    .index .line .arrow {
+      font-size: clamp(22px, 2.4vw, 28px);
+      color: var(--wine);
+      padding-left: 14px;
+      transition: transform 0.25s var(--ease-luxury);
+    }
+    .index .line:hover .arrow { transform: translate(5px, -5px); }
+
+    .index .footer {
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.4s ease-out, transform 0.4s var(--ease-luxury);
+    }
+    .index.step-footer .footer {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ========================================================
+       04. TODAY'S TABLE / DISH LIST (FLUID FULLSCREEN GRID)
+       ======================================================== */
+    .menu .screen-content {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      padding: clamp(60px, 7.5vh, 88px) clamp(28px, 4.5vw, 75px) clamp(70px, 9vh, 100px);
+      overflow-y: auto !important;
+      overflow-x: hidden !important;
+      -webkit-overflow-scrolling: touch;
+      touch-action: pan-y;
+      scroll-behavior: smooth;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(112, 33, 43, 0.25) transparent;
+    }
+    .menu .screen-content::-webkit-scrollbar {
+      width: 6px;
+    }
+    .menu .screen-content::-webkit-scrollbar-thumb {
+      background: rgba(112, 33, 43, 0.25);
+      border-radius: 3px;
+    }
+    .menu .page-header {
+      opacity: 0;
+      transform: translateY(-8px);
+      transition: opacity 0.42s ease-out, transform 0.42s var(--ease-luxury);
+    }
+    .menu.step-header .page-header {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .menu .top {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      border-bottom: 1px solid #ad9786;
+      padding-bottom: 14px;
+      position: sticky;
+      top: 0;
+      /* background: var(--paper); */
+      z-index: 10;
+      padding-top: 4px;
+    }
+    .menu .top h1 {
+      font-size: clamp(55px, 6.8vw, 88px);
+      font-weight: 400;
+      color: var(--wine);
+      margin: 0;
+      line-height: 0.9;
+      letter-spacing: -0.025em;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.5s ease-out, transform 0.5s var(--ease-luxury);
+    }
+    .menu.step-title .top h1 {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .menu .top .tabs {
+      display: flex;
+      gap: clamp(14px, 2vw, 28px);
+      font-size: clamp(13px, 1.3vw, 16px);
+      letter-spacing: 0.12em;
+      flex-wrap: wrap;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.45s ease-out, transform 0.45s var(--ease-luxury);
+    }
+    .menu.step-tabs .top .tabs {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .menu .top .tabs button {
+      background: transparent;
+      color: #8c7b70;
+      padding-bottom: 6px;
+      border-bottom: 2px solid transparent;
+      transition: all 0.25s var(--ease-luxury);
+      white-space: nowrap;
+    }
+    .menu .top .tabs button:hover { color: var(--wine); }
+    .menu .top .tabs button.active {
+      color: var(--wine);
+      border-bottom-color: var(--wine);
+    }
+    .menu .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-auto-rows: minmax(280px, auto);
+      /* gap: clamp(22px, 2.8vh, 34px) clamp(20px, 2.5vw, 36px); */
+      gap:4px;
+      margin-top: clamp(18px, 2.5vh, 28px);
+      padding-bottom: 60px;
+      touch-action: pan-y;
+    }
+    .menu .dish {
+      border-bottom: 1px solid #c9b9a8;
+      cursor: pointer;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      /* height: clamp(270px, 34vh, 330px); */
+      opacity: 0;
+      transform: translateY(20px);
+      /* transition: opacity 0.46s cubic-bezier(0.2, 0.8, 0.25, 1), transform 0.46s cubic-bezier(0.2, 0.8, 0.25, 1), border-color 0.28s var(--ease-luxury); */
+      will-change: opacity, transform;
+      animation: dishShow 0.6s forwards cubic-bezier(0.2, 0.8, 0.25, 1);
+    }
+    /* .menu.step-grid .dish:nth-child(1) { transition-delay: 0.03s; opacity: 1; transform: translateY(0); }
+    .menu.step-grid .dish:nth-child(2) { transition-delay: 0.07s; opacity: 1; transform: translateY(0); }
+    .menu.step-grid .dish:nth-child(3) { transition-delay: 0.11s; opacity: 1; transform: translateY(0); }
+    .menu.step-grid .dish:nth-child(4) { transition-delay: 0.15s; opacity: 1; transform: translateY(0); }
+    .menu.step-grid .dish:nth-child(5) { transition-delay: 0.19s; opacity: 1; transform: translateY(0); }
+    .menu.step-grid .dish:nth-child(6) { transition-delay: 0.23s; opacity: 1; transform: translateY(0); }
+    .menu.step-grid .dish:nth-child(7) { transition-delay: 0.27s; opacity: 1; transform: translateY(0); }
+    .menu.step-grid .dish:nth-child(8) { transition-delay: 0.31s; opacity: 1; transform: translateY(0); }
+    .menu.step-grid .dish:nth-child(9) { transition-delay: 0.35s; opacity: 1; transform: translateY(0); }
+    .menu.step-grid .dish:nth-child(n+10) { transition-delay: 0.38s; opacity: 1; transform: translateY(0); } */
+
+    .menu.step-grid .dish:nth-child(1) { animation-delay: 0.03s; }
+    .menu.step-grid .dish:nth-child(2) { animation-delay: 0.07s;  }
+    .menu.step-grid .dish:nth-child(3) { animation-delay: 0.11s; }
+    .menu.step-grid .dish:nth-child(4) { animation-delay: 0.15s;  }
+    .menu.step-grid .dish:nth-child(5) { animation-delay: 0.19s;  }
+    .menu.step-grid .dish:nth-child(6) { animation-delay: 0.23s;  }
+    .menu.step-grid .dish:nth-child(7) { animation-delay: 0.27s;  }
+    .menu.step-grid .dish:nth-child(8) { animation-delay: 0.31s;  }
+    .menu.step-grid .dish:nth-child(9) { animation-delay: 0.35s;  }
+    .menu.step-grid .dish:nth-child(n+10) { animation-delay: 0.38s;}
+
+
+    @keyframes dishShow {
+      0% {
+        opacity: 0; 
+        transform: translateY(20);
+      }      
+      100% {
+        opacity: 1; 
+        transform: translateY(0);
+      }
+    }
+
+
+    .menu.step-grid .dish:hover, .menu.step-grid .dish:active {
+      transform: translateY(-5px);
+      border-bottom-color: var(--wine);
+    }
+    .menu .footer {
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.42s ease-out, transform 0.42s var(--ease-luxury);
+    }
+    .menu.step-footer .footer {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .menu .dish .photo {
+      flex: 1;
+      min-height: 170px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: var(--paper-card);
+      /* overflow: hidden; */
+      position: relative;
+      padding: 24px;
+    }
+    .menu .dish .photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      mix-blend-mode: multiply;
+      filter: contrast(0.99);
+      transition: transform 0.4s var(--ease-luxury);
+    }
+    .menu .dish:hover .photo img { transform: scale(1.035); }
+    .menu .dish .dish-3d-badge {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      background: rgba(244, 239, 229, 0.94);
+      color: var(--wine);
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      padding: 3px 8px;
+      border: 1px solid rgba(112, 33, 43, 0.25);
+      border-radius: 12px;
+      transition: background 0.2s;
+    }
+    .menu .dish:hover .dish-3d-badge { background: var(--wine); color: #fff; }
+    .menu .dish .dish-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: clamp(10px, 1.4vh, 16px) 4px 2px;
+    }
+    .menu .dish .dish-info strong {
+      font-size: clamp(18px, 2vw, 24px);
+      color: #422d2b;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+    }
+    .menu .dish .dish-info i {
+      font-size: 13px;
+      color: var(--wine);
+      font-style: normal;
+    }
+    .menu .dish p {
+      margin: 3px 4px clamp(6px, 1vh, 12px);
+      font-size: clamp(13px, 1.3vw, 15px);
+      color: #867a70;
+      letter-spacing: 0.04em;
+    }
+
+    /* ========================================================
+       05. DISH REAL PHOTO 360 & 2.5D DETAIL (FLUID 100%)
+       ======================================================== */
+    .detail { background: #f3eee6; }
+    .detail .screen-content {
+      position: absolute;
+      inset: 0;
+      display: flex;
+    }
+    .detail .left {
+      flex: 0 0 58%;
+      height: 100%;
+      background: #ece6dc;
+      position: relative;
+      overflow: hidden;
+      perspective: 1200px;
+    }
+    .detail .left::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(ellipse at center, transparent 38%, rgba(91,63,48,0.065));
+      z-index: 2;
+    }
+    .detail .view-title {
+      position: absolute;
+      left: clamp(28px, 4vw, 65px);
+      top: clamp(25px, 4vh, 45px);
+      font-size: 14px;
+      letter-spacing: 0.22em;
+      color: var(--wine);
+      z-index: 3;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.45s ease-out, transform 0.45s var(--ease-luxury);
+    }
+    .detail.step-plate .view-title {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    #photo-360-container {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 10%;
+      bottom: 22%;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: grab;
+      touch-action: none;
+      opacity: 0;
+      transform: scale(0.95) translateY(14px);
+      transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1), transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: opacity, transform;
+    }
+    #photo-360-container:active { cursor: grabbing; }
+    .detail.step-plate #photo-360-container {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+
+    #photo-360-img {
+      max-width: 88%;
+      max-height: 85%;
+      object-fit: contain;
+      mix-blend-mode: multiply;
+      filter: contrast(0.99) drop-shadow(0 20px 30px rgba(78, 56, 44, 0.16));
+      pointer-events: none;
+      transition: transform 0.05s ease-out;
+      transform-style: preserve-3d;
+    }
+
+    .photo-mode-toggle-btn {
+      position: absolute;
+      top: 14px;
+      right: 20px;
+      z-index: 25;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 16px;
+      background: rgba(244, 239, 229, 0.92);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(112, 33, 43, 0.28);
+      border-radius: 20px;
+      color: var(--wine-dark);
+      font-family: var(--font-ko);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      box-shadow: 0 4px 14px rgba(48, 39, 36, 0.12);
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      user-select: none;
+    }
+    .photo-mode-toggle-btn:hover {
+      background: #ffffff;
+      border-color: var(--wine);
+      box-shadow: 0 6px 18px rgba(48, 39, 36, 0.18);
+      transform: translateY(-1px);
+    }
+    .photo-mode-toggle-btn:active {
+      transform: scale(0.96);
+    }
+    .photo-mode-toggle-btn.is-photo-mode {
+      background: var(--wine);
+      color: #f4efe5;
+      border-color: var(--wine-dark);
+      box-shadow: 0 4px 14px rgba(112, 33, 43, 0.35);
+    }
+    .photo-mode-toggle-btn.is-photo-mode:hover {
+      background: var(--wine-light);
+    }
+
+    .detail .rotate-guide {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: clamp(110px, 16vh, 160px);
+      text-align: center;
+      font-size: clamp(15px, 1.8vw, 19px);
+      color: var(--wine);
+      letter-spacing: 0.16em;
+      z-index: 3;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.45s ease-out, transform 0.45s var(--ease-luxury);
+    }
+    .detail.step-plate .rotate-guide {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .detail .thumbnails {
+      position: absolute;
+      left: clamp(28px, 4vw, 65px);
+      bottom: clamp(40px, 6vh, 70px);
+      display: flex;
+      gap: 12px;
+      z-index: 3;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.45s ease-out, transform 0.45s var(--ease-luxury);
+    }
+    .detail.step-plate .thumbnails {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .detail .thumbnails .view-tab {
+      width: clamp(90px, 9vw, 115px);
+      height: clamp(60px, 7vh, 75px);
+      border: 1px solid #b4a69a;
+      background: #f4efe5;
+      padding: 0;
+      overflow: hidden;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s var(--ease-luxury);
+    }
+    .detail .thumbnails .view-tab.active {
+      border: 2px solid var(--wine);
+      box-shadow: 0 4px 12px rgba(112, 33, 43, 0.15);
+      transform: translateY(-2px);
+    }
+    .detail .thumbnails .view-tab span {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      color: var(--ink);
+    }
+    .detail .thumbnails .view-tab small {
+      font-size: 9px;
+      color: var(--wine);
+      letter-spacing: 0.1em;
+      margin-top: 2px;
+    }
+
+    .detail .right {
+      flex: 0 0 42%;
+      height: 100%;
+      background: var(--paper);
+      padding: clamp(65px, 9vh, 110px) clamp(32px, 4vw, 65px) clamp(45px, 6vh, 75px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .detail .right .meta-wrap .mini {
+      font-size: 14px;
+      letter-spacing: 0.24em;
+      color: var(--wine);
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.4s ease-out, transform 0.4s var(--ease-luxury);
+    }
+    .detail.step-tag .right .meta-wrap .mini {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .detail .right h1 {
+      font-size: clamp(48px, 6vw, 76px);
+      line-height: 0.95;
+      font-weight: 400;
+      color: var(--wine);
+      margin: clamp(14px, 2vh, 24px) 0 clamp(10px, 1.5vh, 18px);
+      letter-spacing: -0.025em;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.52s ease-out, transform 0.52s var(--ease-luxury);
+    }
+    .detail.step-name .right h1 {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .detail .right .kor,
+    .detail .right .desc {
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.46s ease-out, transform 0.46s var(--ease-luxury);
+    }
+    .detail.step-story .right .kor,
+    .detail.step-story .right .desc {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .detail .right .kor {
+      font-family: var(--font-ko);
+      font-size: clamp(20px, 2.2vw, 25px);
+      font-weight: 400;
+      margin: 0 0 clamp(16px, 2.5vh, 28px);
+      color: var(--ink);
+    }
+    .detail .right .desc {
+      font-family: var(--font-ko);
+      font-size: clamp(16px, 1.7vw, 19px);
+      line-height: 2.0;
+      color: #756961;
+      font-weight: 300;
+      margin: clamp(16px, 2.5vh, 28px) 0;
+    }
+    .detail .right .ingredients {
+      font-size: clamp(14px, 1.5vw, 17px);
+      letter-spacing: 0.10em;
+      line-height: 1.9;
+      border-top: 1px solid #bea69c;
+      border-bottom: 1px solid #bea69c;
+      padding: clamp(14px, 2vh, 22px) 0;
+      color: #6d514d;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.44s ease-out, transform 0.44s var(--ease-luxury);
+    }
+    .detail.step-ingredients .right .ingredients {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .detail .docent-bar {
+      margin: clamp(16px, 2vh, 24px) 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #eee8dc;
+      padding: clamp(10px, 1.4vh, 14px) clamp(14px, 1.8vw, 18px);
+      border-radius: 4px;
+      border-left: 3px solid var(--wine);
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.44s ease-out, transform 0.44s var(--ease-luxury);
+    }
+    .detail.step-ingredients .docent-bar {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .detail .docent-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      color: var(--wine);
+    }
+    .eq-group {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      height: 14px;
+    }
+    .eq-bar {
+      width: 3px;
+      height: 6px;
+      background: var(--wine);
+      border-radius: 1px;
+    }
+    .docent-bar.playing .eq-bar {
+      animation: eqDance 0.8s infinite ease-in-out alternate;
+    }
+    .docent-bar.playing .eq-bar:nth-child(2) { animation-delay: 0.2s; }
+    .docent-bar.playing .eq-bar:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes eqDance {
+      0% { height: 4px; }
+      100% { height: 14px; }
+    }
+
+    .detail .docent-btn {
+      background: transparent;
+      border: 1px solid var(--wine);
+      color: var(--wine);
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      padding: 6px 16px;
+      border-radius: 20px;
+      transition: all 0.2s var(--ease-luxury);
+      font-family: var(--font-ko);
+    }
+    .detail .docent-btn.active {
+      background: var(--wine);
+      color: #fff;
+    }
+
+    .detail .right .action {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.46s ease-out, transform 0.46s var(--ease-luxury);
+    }
+    .detail.step-actions .right .action {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .detail .right .action .qty-box {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: clamp(20px, 2.2vw, 24px);
+      letter-spacing: 0.15em;
+    }
+    .detail .right .action .qty-btn {
+      background: transparent;
+      border: 1px solid #b8a698;
+      width: clamp(38px, 4vw, 44px);
+      height: clamp(38px, 4vw, 44px);
+      border-radius: 50%;
+      font-size: 20px;
+      color: var(--wine);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.18s var(--ease-luxury);
+    }
+    .detail .right .action .qty-btn:active {
+      background: rgba(112, 33, 43, 0.15);
+      transform: scale(0.92);
+    }
+    .detail .close-btn {
+      position: absolute;
+      right: clamp(25px, 3.5vw, 45px);
+      top: clamp(20px, 3.5vh, 40px);
+      color: var(--wine);
+      font-size: clamp(30px, 3.5vw, 40px);
+      line-height: 1;
+      cursor: pointer;
+      z-index: 20;
+      background: transparent;
+      opacity: 0;
+      transform: scale(0.9);
+      transition: opacity 0.4s ease-out, transform 0.3s var(--ease-luxury);
+    }
+    .detail.step-close .close-btn {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .detail .close-btn:hover { transform: rotate(90deg) scale(1.1); }
+
+    /* ========================================================
+       06. ORDER CONFIRMATION RECEIPT SCREEN (THE RECEIPT)
+       (미쉐린 3스타급 빈티지 페이퍼 영수증 인터랙션)
+       ======================================================== */
+    .thanks {
+      position: absolute;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      background-color: #2b0308;
+      background-image: url('assets/order/OrderBackground.webp'), url('assets/order/OrderBackground.png');
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      display: none;
+      opacity: 0;
+      pointer-events: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+      -webkit-user-select: none;
+      transition: opacity 0.4s ease;
+    }
+    .thanks.active {
+      display: flex;
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .thanks::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 50%, rgba(20, 2, 5, 0.05) 30%, rgba(15, 1, 3, 0.45) 80%, rgba(6, 0, 1, 0.75) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .receipt-stage {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      padding: clamp(14px, 2vh, 28px) clamp(16px, 2.5vw, 36px);
+      box-sizing: border-box;
+    }
+
+    /* Phase 1 — Paper Reveal */
+    .receipt-paper-wrapper {
+      position: relative;
+      width: clamp(330px, 35vw, 440px);
+      max-height: calc(100vh - clamp(75px, 11vh, 105px));
+      display: flex;
+      flex-direction: column;
+      background-color: #eee8dc;
+      background-image: url('assets/order/OrderPaper.webp'), url('assets/order/OrderPaper.png');
+      background-size: cover;
+      background-repeat: no-repeat;
+      border-radius: 2px;
+      box-shadow: 0 32px 75px rgba(18, 4, 8, 0.65), 0 8px 22px rgba(0, 0, 0, 0.35), inset 0 0 0 1px rgba(220, 185, 120, 0.3);
+      overflow: hidden;
+      transform: perspective(1000px) rotateX(6deg) translateY(-26px) scale(0.96);
+      opacity: 0;
+      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.8s ease;
+      will-change: transform, opacity;
+    }
+    .thanks.revealed .receipt-paper-wrapper {
+      transform: perspective(1000px) rotateX(0deg) translateY(0) scale(1);
+      opacity: 1;
+      box-shadow: 0 38px 90px rgba(18, 4, 8, 0.75), 0 10px 28px rgba(0, 0, 0, 0.42), inset 0 0 0 1px rgba(220, 185, 120, 0.45);
+    }
+    .thanks.exit .receipt-paper-wrapper {
+      transform: perspective(1000px) rotateX(-4deg) translateY(18px) scale(0.97);
+      opacity: 0;
+      transition: transform 0.35s ease-in, opacity 0.35s ease-in;
+    }
+
+    /* Luxury Chef Confirmation Stamp / Wax Seal */
+    .receipt-seal-stamp {
+      position: absolute;
+      right: clamp(14px, 2.2vw, 24px);
+      bottom: clamp(48px, 7vh, 70px);
+      width: clamp(74px, 8.5vw, 90px);
+      height: clamp(74px, 8.5vw, 90px);
+      border: 2px dashed rgba(123, 32, 40, 0.72);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform: rotate(-14deg) scale(2.2);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.42s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.28s ease;
+      z-index: 12;
+      background: radial-gradient(circle, rgba(123, 32, 40, 0.08) 0%, transparent 70%);
+      box-shadow: inset 0 0 0 2px rgba(123, 32, 40, 0.25);
+    }
+    .receipt-seal-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #7b2028;
+      font-family: var(--font-en);
+      letter-spacing: 0.12em;
+    }
+    .receipt-seal-stars {
+      font-size: 8px;
+      letter-spacing: 0.22em;
+      color: #9b2832;
+      line-height: 1;
+      margin-bottom: 2px;
+    }
+    .receipt-seal-title {
+      font-size: clamp(9px, 1vw, 11px);
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      line-height: 1.1;
+      border-top: 1px solid rgba(123, 32, 40, 0.5);
+      border-bottom: 1px solid rgba(123, 32, 40, 0.5);
+      padding: 1px 4px;
+      margin: 1px 0;
+    }
+    .receipt-seal-chef {
+      font-size: 7.5px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      opacity: 0.88;
+      font-weight: 600;
+    }
+    .receipt-seal-sub {
+      font-size: 6.5px;
+      letter-spacing: 0.16em;
+      opacity: 0.72;
+    }
+    .thanks.phase-stamp .receipt-seal-stamp {
+      transform: rotate(-14deg) scale(1);
+      opacity: 0.86;
+    }
+
+    /* Header Photo */
+    .receipt-photo-pic {
+      width: 100%;
+      display: block;
+      flex-shrink: 0;
+    }
+    .receipt-header-photo {
+      width: 100%;
+      height: clamp(90px, 15vh, 135px);
+      object-fit: cover;
+      display: block;
+      border-bottom: 1px solid rgba(112, 33, 43, 0.15);
+    }
+
+    /* Receipt Body Content */
+    .receipt-body {
+      padding: clamp(10px, 1.6vh, 18px) clamp(16px, 2.5vw, 28px) clamp(12px, 1.8vh, 22px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      gap:24px;
+    }
+    .receipt-body::-webkit-scrollbar { display: none; }
+
+    /* Phase 2 — Ink Reveal Elements */
+    .receipt-ink {
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.52s cubic-bezier(0.2, 0.8, 0.25, 1), transform 0.52s cubic-bezier(0.2, 0.8, 0.25, 1);
+      will-change: opacity, transform;
+    }
+    .thanks.phase-brand .receipt-ink-brand { opacity: 1; transform: translateY(0); }
+    .thanks.phase-msg .receipt-ink-msg { opacity: 1; transform: translateY(0); }
+    .thanks.phase-details .receipt-ink-details { opacity: 1; transform: translateY(0); }
+
+    /* Typography */
+    .receipt-brand-num {
+      font-family: var(--font-en);
+      font-size: clamp(30px, 3.8vw, 42px);
+      font-weight: 400;
+      color: #1a080a;
+      line-height: 0.95;
+      letter-spacing: 0.04em;
+    }
+    .receipt-brand-text {
+      font-family: var(--font-en);
+      font-size: clamp(12px, 1.5vw, 16px);
+      font-weight: 500;
+      letter-spacing: 0.38em;
+      color: #1a080a;
+      margin-top: 2px;
+      margin-right: -0.38em;
+    }
+    .receipt-confirm-tag {
+      font-family: 'Courier Prime', monospace;
+      font-size: clamp(10px, 1.1vw, 12px);
+      letter-spacing: 0.22em;
+      color: #4a342f;
+      margin: 5px 0 3px;
+    }
+    .receipt-stars {
+      font-family: 'Courier Prime', monospace;
+      font-size: 11px;
+      color: #5a443e;
+      letter-spacing: 0.15em;
+      margin: 3px 0;
+      overflow: hidden;
+      white-space: nowrap;
+      width: 100%;
+    }
+    .receipt-placed-title {
+      font-family: 'Courier Prime', monospace;
+      font-size: clamp(11px, 1.2vw, 13px);
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: #2e1a17;
+      line-height: 1.45;
+      margin: 4px 0 6px;
+    }
+    .receipt-placed-desc {
+      font-family: 'Courier Prime', monospace;
+      font-size: clamp(9px, 1vw, 11px);
+      letter-spacing: 0.08em;
+      color: #4a342f;
+      line-height: 1.5;
+      margin: 0 0 4px;
+    }
+
+    /* Ordered Items Container */
+    .receipt-items-container {
+      width: 100%;
+      margin: 4px 0 6px;
+      text-align: left;
+      font-family: 'Courier Prime', var(--font-ko), monospace;
+      font-size: clamp(10px, 1.1vw, 12px);
+      color: #2e1a17;
+      line-height: 1.55;
+      border-top: 1px dashed rgba(112, 33, 43, 0.25);
+      border-bottom: 1px dashed rgba(112, 33, 43, 0.25);
+      padding: 5px 0;
+    }
+    .receipt-item-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin: 2px 0;
+    }
+    .receipt-item-name {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      padding-right: 8px;
+    }
+    .receipt-item-qty {
+      flex-shrink: 0;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+    }
+
+    /* Meta Info: Date & Time */
+    .receipt-meta-box {
+      font-family: 'Courier Prime', monospace;
+      font-size: clamp(10px, 1.1vw, 12px);
+      color: #2e1a17;
+      letter-spacing: 0.1em;
+      line-height: 1.5;
+      margin: 4px 0;
+    }
+    .receipt-meta-row {
+      margin: 1px 0;
+    }
+    .receipt-knot-pic {
+      display: block;
+      margin: 4px 0 2px;
+    }
+    .receipt-knot-symbol {
+      width: clamp(32px, 3.5vw, 42px);
+      height: auto;
+      opacity: 0.85;
+      display: block;
+      margin: 0 auto;
+    }
+    .receipt-table-label {
+      font-family: 'Courier Prime', monospace;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      color: #5a443e;
+      margin-top: 2px;
+    }
+    .receipt-table-val {
+      font-family: var(--font-en);
+      font-size: clamp(20px, 2.4vw, 26px);
+      letter-spacing: 0.08em;
+      color: #1a080a;
+      line-height: 1;
+      margin: 1px 0 4px;
+    }
+
+    /* Phase 3 — Barcode Reveal */
+    .receipt-barcode-wrap {
+      width: clamp(170px, 20vw, 230px);
+      margin: 2px auto 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      clip-path: inset(0 100% 0 0);
+      transition: clip-path 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: clip-path;
+    }
+    .thanks.phase-barcode .receipt-barcode-wrap {
+      clip-path: inset(0 0% 0 0);
+    }
+    .receipt-barcode-svg {
+      width: 100%;
+      height: clamp(24px, 3.4vh, 32px);
+      display: block;
+    }
+    .receipt-barcode-text {
+      font-family: 'Courier Prime', monospace;
+      font-size: 9px;
+      letter-spacing: 0.25em;
+      color: #3b2823;
+      margin-top: 2px;
+    }
+
+    /* Phase 5 — Ready: Back to Menu Ornament & Actions */
+    .receipt-footer-actions {
+      margin-top: clamp(8px, 1.4vh, 16px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      z-index: 15;
+    }
+    .receipt-back-ornament-btn {
+      background: none;
+      border: none;
+      padding: 4px 8px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: translateY(12px) scale(0.97);
+      transition: transform 0.4s var(--ease-luxury), opacity 0.4s var(--ease-luxury), filter 0.25s ease;
+      filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.45));
+      -webkit-tap-highlight-color: transparent;
+      outline: none;
+      pointer-events: none;
+    }
+    .receipt-back-ornament-btn:hover {
+      transform: translateY(10px) scale(1.025);
+      filter: drop-shadow(0 6px 20px rgba(212, 175, 55, 0.45));
+    }
+    .receipt-back-ornament-btn:active {
+      transform: translateY(12px) scale(0.96);
+    }
+    .receipt-ornament-img {
+      width: clamp(260px, 28vw, 360px);
+      height: auto;
+      display: block;
+      transition: filter 0.25s ease;
+    }
+    .thanks.phase-ready .receipt-back-ornament-btn {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+    .receipt-sub-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 2px;
+      display:none;
+    }
+    .receipt-action-pill {
+      background: rgba(26, 6, 10, 0.65);
+      border: 1px solid rgba(220, 185, 120, 0.3);
+      color: rgba(245, 235, 220, 0.8);
+      font-family: var(--font-ko);
+      font-size: 11px;
+      letter-spacing: 0.05em;
+      padding: 5px 14px;
+      border-radius: 20px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: all 0.25s ease;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      pointer-events: none;
+    }
+    .receipt-action-pill:hover {
+      background: rgba(123, 32, 40, 0.7);
+      border-color: rgba(220, 185, 120, 0.6);
+      color: #fff;
+      transform: translateY(6px);
+    }
+    .thanks.phase-ready .receipt-action-pill {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    /* Floating Checkout Bar on Page 4 (Today's Table) */
+    .floating-checkout-bar {
+      position: absolute;
+      bottom: clamp(65px, 9vh, 90px);
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      opacity: 0;
+      pointer-events: none;
+      background: var(--wine);
+      color: #fcf8ee;
+      border: 1px solid rgba(229, 195, 166, 0.5);
+      padding: clamp(12px, 1.8vh, 16px) clamp(28px, 3.5vw, 42px);
+      border-radius: 30px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--font-en);
+      font-size: clamp(15px, 1.8vw, 18px);
+      letter-spacing: 0.12em;
+      box-shadow: 0 8px 30px rgba(112, 33, 43, 0.45);
+      cursor: pointer;
+      transition: all 0.35s var(--ease-luxury);
+      z-index: 25;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .floating-checkout-bar.visible {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+      pointer-events: auto;
+    }
+    .floating-checkout-bar:hover {
+      background: var(--wine-dark);
+      transform: translateX(-50%) translateY(-2px);
+      box-shadow: 0 12px 36px rgba(112, 33, 43, 0.6);
+    }
+    .floating-checkout-bar:active {
+      transform: translateX(-50%) scale(0.98);
+    }
+
+    /* Reduced Motion Accessibility for Order Screen */
+    @media (prefers-reduced-motion: reduce) {
+      .receipt-paper-wrapper,
+      .receipt-ink,
+      .receipt-barcode-wrap,
+      .receipt-back-btn,
+      .receipt-replay-audio-btn,
+      .floating-checkout-bar {
+        transition: none !important;
+        transform: none !important;
+        opacity: 1 !important;
+        clip-path: none !important;
+      }
+    }
+
+    /* Global Toast Alert */
+    #app-toast {
+      position: absolute;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: rgba(48, 39, 36, 0.94);
+      color: #fbf7ee;
+      font-family: var(--font-ko);
+      font-size: 16px;
+      padding: 14px 30px;
+      border-radius: 30px;
+      letter-spacing: 0.04em;
+      pointer-events: none;
+      opacity: 0;
+      transition: all 0.35s var(--ease-luxury);
+      z-index: 100;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    }
+    #app-toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+  .menu .dish.sold-out { filter: grayscale(1); opacity: .55; cursor: not-allowed; }
+.menu .dish.sold-out:hover { transform: none; }
+.menu .dish.sold-out:hover .photo img { transform: none; }
+#dish-model-viewer { position:absolute; inset:0; touch-action:none; }
+#dish-model-viewer canvas { display:block; width:100%; height:100%; }
+[hidden] { display:none !important; }
+</style>
+<link rel="stylesheet" href="assets/quantity-dial.css">
+<link rel="stylesheet" href="assets/mobile.css">
+<link rel="stylesheet" href="assets/welcome-intro.css">
+</head>
+<body>
+
+<div id="app-stage">
+
+  <div id="app-toast">메뉴가 추가되었습니다.</div>
+
+  <!-- Silk Velvet Ambient Gradient Veil during Page Transitions -->
+  <div id="screen-veil" class="screen-veil" aria-hidden="true"></div>
+
+  <!-- Background Music Audio Tag -->
+  <audio id="bgm-player" src="assets/audio/bgm.mp3" loop preload="auto"></audio>
+
+  <!-- ========================================================
+       PAGE 1: WELCOME SCREEN (INTERACTIVE VELVET ENVELOPE & TRAY)
+       (아이패드 사파리 전체화면 터치형 인터랙티브 웰컴 스크린)
+       ======================================================== -->
+  <section class="screen welcome active welcome-intro" id="p1" onclick="handleWelcomeScreenTouch(event)">
+    <!-- Fullscreen Damask Burgundy Background -->
+    <div class="welcome-damask-bg"></div>
+
+    <!-- Header Overlay -->
+    <header class="page-header welcome-header">
+      <span class="brand-title" onclick="event.stopPropagation();">204 DINING</span>
+      <div class="controls-wrap">
+        <!-- SFX / Paper Glide Sound Toggle -->
+        <button class="ctrl-pill active" id="sfx-toggle-btn" onclick="event.stopPropagation(); toggleSFX()" title="효과음 토글">
+          <span id="sfx-icon">🔔</span>
+          <span id="sfx-label">효과음: ON</span>
+        </button>
+        <!-- BGM Button -->
+        <button class="ctrl-pill active" id="bgm-toggle-btn" onclick="event.stopPropagation(); toggleBGM()" title="배경음악 토글">
+          <span class="sound-pulse"></span>
+          <span id="bgm-label">♫ BGM: ON</span>
+        </button>
+        <!-- Voice Mode Button -->
+        <button class="ctrl-pill" id="voice-mode-btn" onclick="event.stopPropagation(); toggleVoiceEngine()" title="음성 모드">
+          <span id="voice-mode-label">🎙️ AI 보이스</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Centerpiece Stage (Tray + Envelope Back + Card + Envelope Front) -->
+    <div class="welcome-centerpiece-stage" id="welcome-centerpiece">
+      <!-- Ornate Silver Tray -->
+      <picture class="welcome-tray-pic">
+        <source srcset="assets/welcome/OrnateSilverTray.webp" type="image/webp">
+        <img src="assets/welcome/OrnateSilverTray.png" class="welcome-tray-img" alt="Ornate Silver Tray" draggable="false">
+      </picture>
+
+      <!-- Velvet Envelope Back & Open Flap -->
+      <picture class="welcome-env-back-pic">
+        <source srcset="assets/welcome/VelvetEnvelopeBack.webp" type="image/webp">
+        <img src="assets/welcome/VelvetEnvelopeBack.png" class="welcome-env-back-img" alt="Velvet Envelope Back" draggable="false">
+      </picture>
+
+      <!-- Ivory Invitation Card (Between Back & Front) -->
+      <div class="welcome-card-wrapper" id="welcome-card-wrapper">
+        <picture class="welcome-card-pic">
+          <source srcset="assets/welcome/InvitationCard.webp" type="image/webp">
+          <img src="assets/welcome/InvitationCard.png" class="welcome-card-img" id="welcome-card-img" alt="204 DINING Invitation Card" draggable="false">
+        </picture>
+      </div>
+
+      <!-- Velvet Envelope Front Pocket (V Notch in front of Card) -->
+      <picture class="welcome-env-front-pic">
+        <source srcset="assets/welcome/VelvetEnvelopeFront.webp" type="image/webp">
+        <img src="assets/welcome/VelvetEnvelopeFront.png" class="welcome-env-front-img" alt="Velvet Envelope Front Pocket" draggable="false">
+      </picture>
+    </div>
+
+    <!-- Right: Chef Portrait Frame (Independent Touch Point) -->
+    <div class="welcome-chef-frame" id="welcome-chef-frame" onclick="event.stopPropagation(); handleChefFrameTouch()" role="button" aria-label="Meet the Chef" tabindex="0">
+      <picture class="welcome-chef-pic">
+        <source srcset="assets/welcome/ChefPortraitFrame.webp" type="image/webp">
+        <img src="assets/welcome/ChefPortraitFrame.png" class="welcome-chef-img" alt="Meet the Chef Frame" draggable="false">
+      </picture>
+    </div>
+
+    <!-- Bottom: Entrance Ornament ("TOUCH ANYWHERE TO ENTER") -->
+    <div class="welcome-entrance-orn" id="welcome-entrance-orn">
+      <picture class="welcome-orn-pic">
+        <source srcset="assets/welcome/EntranceOrnament.webp" type="image/webp">
+        <img src="assets/welcome/EntranceOrnament.png" class="welcome-orn-img" alt="Touch Anywhere to Enter" draggable="false">
+      </picture>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       PAGE 2: MEET THE CHEF (CHEF PROFILE SCREEN)
+       (1:1 아이보리 앤티크 종이 질감 & 골드 타원 액자)
+       ======================================================== -->
+  <section class="screen chef-screen" id="p2" aria-label="Meet the Chef">
+    <!-- Authentic Ivory Background Paper with Antique Border & Texture -->
+    <div class="chef-bg-paper"></div>
+
+    <!-- Close Button Top-Right -->
+    <button class="chef-close-btn" onclick="closeChefOverlay()" aria-label="닫기" title="Close Profile">×</button>
+
+    <div class="chef-stage-container">
+      <!-- Left Column (~52%): Antique Gold Oval Frame + Inner Grayscale Chef Portrait -->
+      <div class="chef-portrait-stage" id="chef-portrait-stage" role="button" aria-label="Chef sanggu JI Portrait" tabindex="0">
+        <!-- Inner Grayscale Chef Portrait (Layer under Frame) -->
+        <picture class="chef-portrait-pic" id="chef-portrait-pic">
+          <source srcset="assets/intro/ChefPortraitOval.webp" type="image/webp">
+          <img src="assets/intro/ChefPortraitOval.png" class="chef-portrait-img" alt="Chef sanggu JI" draggable="false">
+        </picture>
+
+        <!-- Antique Gold Oval Frame (Layer over Portrait) -->
+        <picture class="chef-frame-pic" id="chef-frame-pic">
+          <source srcset="assets/intro/GoldOvalFrame.webp" type="image/webp">
+          <img src="assets/intro/GoldOvalFrame.png" class="chef-frame-img" alt="Gold Antique Oval Frame" draggable="false">
+        </picture>
+      </div>
+
+      <!-- Right Column (~48%): Editorial Fine-Dining Typography & Identity -->
+      <div class="chef-content-stage" id="chef-content-stage">
+        <!-- Top Label: 204 DINING -->
+        <div class="chef-top-label" id="chef-anim-top">204 &nbsp;DINING</div>
+
+        <!-- Top Divider Ornament -->
+        <picture class="chef-divider-pic" id="chef-anim-div1">
+          <source srcset="assets/intro/GoldDividerOrnament.webp" type="image/webp">
+          <img src="assets/intro/GoldDividerOrnament.png" class="chef-divider-img" alt="Ornament" draggable="false">
+        </picture>
+
+        <!-- Main Title: MEET THE CHEF -->
+        <div class="chef-title-wrap" id="chef-anim-title">
+          <h1 class="chef-title">MEET<br>THE CHEF</h1>
+        </div>
+
+        <!-- Middle Divider Ornament -->
+        <picture class="chef-divider-pic" id="chef-anim-div2">
+          <source srcset="assets/intro/GoldDividerOrnament.webp" type="image/webp">
+          <img src="assets/intro/GoldDividerOrnament.png" class="chef-divider-img" alt="Ornament" draggable="false">
+        </picture>
+
+        <!-- Chef Name & Sub -->
+        <div class="chef-bio-wrap" id="chef-anim-bio">
+          <div class="chef-name-row">
+            <span class="chef-first-name">sanggu</span>
+            <span class="chef-last-name">JI</span>
+          </div>
+          <div class="chef-born-text">Born in 1995</div>
+        </div>
+
+        <!-- Three Star Mark (3 floral-star symbols in burgundy) -->
+        <div class="chef-stars-wrap" id="chef-anim-stars">
+          <picture class="chef-stars-pic">
+            <source srcset="assets/intro/ThreeStarMark.png" type="image/webp">
+            <img src="assets/intro/ThreeStarMark.png" class="chef-stars-img" alt="Three Stars" draggable="false">
+          </picture>
+          <div class="chef-stars-sub">Three Michelin Tire</div>
+        </div>
+
+        <!-- Bottom Divider Ornament -->
+        <picture class="chef-divider-pic" id="chef-anim-div3">
+          <source srcset="assets/intro/GoldDividerOrnament.webp" type="image/webp">
+          <img src="assets/intro/GoldDividerOrnament.png" class="chef-divider-img" alt="Ornament" draggable="false">
+        </picture>
+
+        <!-- Bottom Logo Watermark: 204 DINING -->
+        <div class="chef-bottom-logo" id="chef-anim-logo">
+          <div class="chef-bottom-num">204</div>
+          <div class="chef-bottom-text">DINING</div>
+        </div>
+
+        <!-- Accessible Navigation Controls -->
+        <div class="chef-nav-actions" id="chef-anim-actions">
+          <button class="chef-nav-btn return-btn" onclick="closeChefOverlay()" aria-label="이전 화면으로 복귀">
+            <span>← RETURN</span>
+          </button>
+          <button class="chef-nav-btn menu-btn" onclick="discoverMenuFromChef()" aria-label="메뉴로 이동">
+            <span>EXPLORE THE MENU →</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       PAGE 3: THE MENU INDEX
+       ======================================================== -->
+  <section class="screen index" id="p3">
+    <header class="page-header">
+      <span class="brand-title" onclick="goToPage(1)">204 DINING</span>
+      <div class="controls-wrap">
+        <span class="edition">THE DINNER SELECTION</span>
+      </div>
+    </header>
+    
+    <div class="screen-content">
+      
+      <div class="lead">
+        <div class="mini">CHAPTER 01</div>
+        <h1>The<br><em>Menu.</em></h1>
+        <div class="artline" style="width: 140px"></div>
+        <p>계절의 좋은 재료로 준비한<br>오늘 저녁의 이야기.</p>
+      </div>
+      
+      <div class="red-thread"></div>
+      
+      <div class="list">
+        <div class="line" onclick="filterAndGo('ALL DISHES')">
+          <span class="idx">01</span><span class="label">All Dishes</span><span class="sub">전체 요리 및 음료</span><span class="arrow">↗</span>
+        </div>
+        <div class="line" onclick="filterAndGo('SIGNATURE')">
+          <span class="idx">02</span><span class="label">Signature</span><span class="sub">시그니처</span><span class="arrow">↗</span>
+        </div>
+        <div class="line" onclick="filterAndGo('STARTERS')">
+          <span class="idx">03</span><span class="label">Starters</span><span class="sub">전채 요리</span><span class="arrow">↗</span>
+        </div>
+        <div class="line" onclick="filterAndGo('MAINS')">
+          <span class="idx">04</span><span class="label">Mains</span><span class="sub">메인 요리</span><span class="arrow">↗</span>
+        </div>
+        <div class="line" onclick="filterAndGo('DESSERTS')">
+          <span class="idx">05</span><span class="label">Desserts</span><span class="sub">디저트</span><span class="arrow">↗</span>
+        </div>
+        <div class="line" onclick="filterAndGo('DRINKS')">
+          <span class="idx">06</span><span class="label">Drinks</span><span class="sub">음료 및 와인</span><span class="arrow">↗</span>
+        </div>
+      </div>
+    </div>
+    
+    <footer class="footer">
+      <span onclick="goToPage(1)" style="cursor:pointer">← BACK TO WELCOME</span>
+      <span class="count">03 / 06</span>
+    </footer>
+  </section>
+
+  <!-- ========================================================
+       PAGE 4: TODAY'S TABLE (DISH LIST)
+       ======================================================== -->
+  <section class="screen menu" id="p4">
+    <header class="page-header">
+      <span class="brand-title" onclick="goToPage(1)">204 DINING</span>
+      <div class="controls-wrap">
+        <button class="ctrl-pill active" onclick="toggleBGM()">
+          <span class="sound-pulse"></span>
+          <span class="bgm-sub-label">♫ BGM</span>
+        </button>
+        <span class="edition" id="cart-counter-badge" style="cursor:pointer" onclick="submitOrder()">TONIGHT'S SELECTION &nbsp;&nbsp; ◯ 00</span>
+      </div>
+    </header>
+    
+    <div class="screen-content">
+      <div class="screen-blur"></div>
+      <div class="top">
+        <h1>Today's Table.</h1>
+        <div class="tabs" id="category-tabs">
+          <button class="active" data-cat="ALL DISHES" onclick="setCategoryFilter('ALL DISHES')">ALL DISHES</button>
+          <button data-cat="SIGNATURE" onclick="setCategoryFilter('SIGNATURE')">SIGNATURE</button>
+          <button data-cat="STARTERS" onclick="setCategoryFilter('STARTERS')">STARTERS</button>
+          <button data-cat="MAINS" onclick="setCategoryFilter('MAINS')">MAINS</button>
+          <button data-cat="DESSERTS" onclick="setCategoryFilter('DESSERTS')">DESSERTS</button>
+          <button data-cat="DRINKS" onclick="setCategoryFilter('DRINKS')">DRINKS</button>
+        </div>
+      </div>
+      
+      <main class="grid" id="dishes-grid">
+        <!-- Rendered dynamically -->
+      </main>
+    </div>
+
+    <!-- Floating Checkout Bar when items in selection -->
+    <div class="floating-checkout-bar" id="floating-checkout-bar" onclick="submitOrder()">
+      <span>✦ Confirm Selection &amp; Place Order</span>
+      <span id="checkout-items-count">(0)</span>
+      <span>→</span>
+    </div>
+    
+    <footer class="footer">
+      <span onclick="goToPage(3)" style="cursor:pointer">← ALL CATEGORIES</span>
+      <span class="count">04 / 06</span>
+    </footer>
+  </section>
+
+  <!-- ========================================================
+       PAGE 5: REAL PHOTO 360 & 2.5D DISH DETAIL
+       ======================================================== -->
+  <section class="screen detail" id="p5">
+    <div class="screen-content">
+      
+      <div class="left">
+        <div class="view-title">204 DINING &nbsp;&nbsp; / &nbsp; THE DISH EXPERIENCE</div>
+        
+        <!-- Interactive Real Photo 360 Viewport -->
+        <div id="photo-360-container">
+          <div id="dish-model-viewer" hidden></div>
+          <img id="photo-360-img" src="assets/hero-dish.jpg" alt="Dish 360">
+          <button type="button" class="photo-mode-toggle-btn" id="photo-mode-toggle-btn" onclick="togglePhotoMode(event)" onpointerdown="event.stopPropagation()" aria-label="사진 및 3D 보기 전환">
+            <span class="toggle-icon" id="photo-toggle-icon">📷</span>
+            <span class="toggle-text" id="photo-toggle-text">사진으로 보기</span>
+          </button>
+        </div>
+        
+        <div class="rotate-guide" id="rotate-guide-text">⟲ &nbsp; REAL PHOTO 360° INTERACTIVE VIEW &nbsp; ⟳</div>
+        
+        <div class="thumbnails">
+          <button class="view-tab active" onclick="setPhotoPreset('hero')">
+            <span>HERO</span>
+            <small>시그니처</small>
+          </button>
+          <button class="view-tab" onclick="setPhotoPreset('tilt-left')">
+            <span>TILT L</span>
+            <small>좌측 3D 틸트</small>
+          </button>
+          <button class="view-tab" onclick="setPhotoPreset('tilt-right')">
+            <span>TILT R</span>
+            <small>우측 3D 틸트</small>
+          </button>
+          <button class="view-tab" onclick="setPhotoPreset('zoom')">
+            <span>ZOOM</span>
+            <small>디테일 확대</small>
+          </button>
+        </div>
+      </div>
+
+      <div class="right">
+        <div class="meta-wrap">
+          <div class="mini" id="detail-category-num">SIGNATURE &nbsp; / &nbsp; NO. 04</div>
+          <h1 id="detail-en-name">Hanwoo<br>Tenderloin.</h1>
+          <p class="kor" id="detail-ko-name">한우 안심과 트러플</p>
+          <div class="divider"></div>
+          <p class="desc" id="detail-desc">정성스럽게 구운 한우 안심에 트러플의 깊은 향과 부드러운 셀러리악 퓌레를 더했습니다.</p>
+          <div class="ingredients" id="detail-ingredients">
+            HANWOO &nbsp;·&nbsp; BLACK TRUFFLE<br>CELERIAC &nbsp;·&nbsp; KING OYSTER
+          </div>
+        </div>
+
+        <div>
+          <!-- Voice Docent Bar with Equalizer -->
+          <div class="docent-bar" id="docent-bar-wrap">
+            <div class="docent-info">
+              <div class="eq-group">
+                <div class="eq-bar"></div>
+                <div class="eq-bar"></div>
+                <div class="eq-bar"></div>
+              </div>
+              <span id="docent-voice-type-label">CHEF'S VOICE DOCENT</span>
+            </div>
+            <button class="docent-btn" id="detail-audio-btn" onclick="toggleDetailNarration()">
+              ▶ 음성 다시 듣기
+            </button>
+          </div>
+
+          <div class="action">
+            <button type="button" class="quantity-open" onclick="openQuantityPicker()" aria-label="수량 선택 다이얼 열기" aria-haspopup="dialog">
+              <span id="detail-qty-val">01</span><small>수량 선택 ▾</small>
+            </button>
+            <button class="btn" onclick="addCurrentDishToCart()">Add to Selection &nbsp; →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="close-btn" onclick="goToPage(4)">×</button>
+  </section>
+
+  <!-- ========================================================
+       PAGE 6: ORDER COMPLETE & LUXURY RECEIPT REVEAL
+       ======================================================== -->
+  <section class="screen thanks" id="p6">
+    <div class="receipt-stage">
+      <!-- Vintage Ivory Receipt Paper -->
+      <div class="receipt-paper-wrapper" id="receipt-paper">
+        <!-- Authentic Header Photo (ceramic plate, dark linen napkin, fresh thyme sprig) -->
+        <picture class="receipt-photo-pic">
+          <source srcset="assets/order/ReceiptPhoto.webp" type="image/webp">
+          <img src="assets/order/ReceiptPhoto.png" class="receipt-header-photo" alt="204 Dining Table" draggable="false">
+        </picture>
+
+        <!-- Receipt Body Content -->
+        <div class="receipt-body">
+          <!-- Phase 2A: Brand Identity -->
+          <div class="receipt-ink receipt-ink-brand">
+            <div class="receipt-brand-num">204</div>
+            <div class="receipt-brand-text">DINING</div>
+            <div class="receipt-confirm-tag">ORDER CONFIRMATION</div>
+            <div class="receipt-stars">**********************************</div>
+          </div>
+
+          <!-- Phase 2B: Placement Message -->
+          <div class="receipt-ink receipt-ink-msg">
+            <div class="receipt-placed-title">ORDER PLACED SUCCESSFULLY.</div>
+            <div class="receipt-placed-desc">THE CHEF HAS RECEIVED YOUR SELECTION.<br>PREPARATION WILL BEGIN MOMENTARILY.</div>
+            <div class="receipt-stars">**********************************</div>
+          </div>
+
+          <!-- Phase 2C: Dynamic Order Items & Metadata -->
+          <div class="receipt-ink receipt-ink-details">
+            <div class="receipt-items-container" id="receipt-items-container">
+              <!-- Dynamically populated rows -->
+            </div>
+
+            <div class="receipt-meta-box">
+              <div class="receipt-meta-row">DATE : <span id="receipt-date-val">OCTOBER 30, 2026</span></div>
+              <div class="receipt-meta-row">TIME : <span id="receipt-time-val">07:42 PM</span></div>
+            </div>
+
+            <!-- FleurDeLis / Celtic Knot Ornament -->
+            <picture class="receipt-knot-pic">
+              <source srcset="assets/order/FleurDeLis.webp" type="image/webp">
+              <img src="assets/order/FleurDeLis.png" class="receipt-knot-symbol" alt="Ornament" draggable="false">
+            </picture>
+
+            <div class="receipt-table-label">TABLE NO.</div>
+            <div class="receipt-table-val">A-3</div>
+          </div>
+
+          <!-- Phase 3: Dynamic Barcode Reveal -->
+          <div class="receipt-barcode-wrap" id="receipt-barcode-wrap">
+            <svg class="receipt-barcode-svg" id="receipt-barcode-svg" viewBox="0 0 200 32" preserveAspectRatio="none" aria-hidden="true"></svg>
+            <div class="receipt-barcode-text" id="receipt-barcode-text">#204-1030-01</div>
+          </div>
+
+          <!-- Luxury Chef Confirmation Stamp / Wax Seal -->
+          <div class="receipt-seal-stamp" id="receipt-seal-stamp" aria-hidden="true">
+            <div class="receipt-seal-inner">
+              <div class="receipt-seal-stars">★★★</div>
+              <div class="receipt-seal-title">CONFIRMED</div>
+              <div class="receipt-seal-chef">CHEF SANGGU JI</div>
+              <div class="receipt-seal-sub">204 PRIVATE DINING</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phase 5: Action Controls -->
+      <div class="receipt-footer-actions">
+        <button class="receipt-back-ornament-btn" id="receipt-back-btn" onclick="handleBackToMenu()" aria-label="메뉴로 돌아가기 (BACK TO MENU)">
+          <picture>
+            <source srcset="assets/order/BackToMenuOrnament.webp" type="image/webp">
+            <img src="assets/order/BackToMenuOrnament.png" class="receipt-ornament-img" alt="BACK TO MENU" draggable="false">
+          </picture>
+        </button>
+        <div class="receipt-sub-actions">
+          <button type="button" class="receipt-action-pill" id="receipt-audio-btn" onclick="replayOrderAudio()" aria-label="안내 음성 다시 듣기">
+            <span>↺</span> 안내 음성 다시 듣기
+          </button>
+          <button type="button" class="receipt-action-pill" onclick="window.print()" aria-label="영수증 출력 및 저장">
+            <span>🖨</span> 영수증 저장 / 출력
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script src="assets/js/three.min.js"></script>
+<script src="assets/js/OrbitControls.js"></script>
+<script src="assets/js/GLTFLoader.js"></script>
+<script src="assets/js/dish-viewer.js"></script>
+<script>
+/* ========================================================
+   1. DATA & STATE MANAGEMENT
+   ======================================================== */
+let dishes = [];
+let currentPage = 1;
+let currentDish = null;
+let detailQty = 1;
+let selectedCart = {};
+let currentCategoryFilter = "ALL DISHES";
+
+let voiceEngine = 'ai'; 
+let isBgmPlaying = false;
+let audioUnlocked = false;
+
+const narrationAudio = new Audio();
+const bgmAudio = document.getElementById('bgm-player');
+let bgmBaseVolume = 0.16;
+let bgmEnabled = true;
+let bgmSettingsReady = false;
+let bgmUserPaused = false;
+let bgmDucked = false;
+let bgmFadeTimer = null;
+bgmAudio.volume = bgmBaseVolume;
+bgmAudio.addEventListener('error', () => { isBgmPlaying = false; updateBgmUI(false); });
+async function loadAudioSettings() {
+  try {
+    let response = await fetch('/api/audio-settings');
+    if (!response.ok) {
+      response = await fetch('audio-settings.json');
+    }
+    if (!response.ok) throw new Error('Audio settings unavailable');
+    const settings = await response.json();
+    bgmEnabled = settings.bgmEnabled !== false;
+    bgmBaseVolume = Math.max(0, Math.min(1, Number(settings.bgmVolume) || 0));
+    bgmAudio.src = settings.bgm || 'assets/audio/bgm.mp3';
+    bgmAudio.volume = bgmDucked ? bgmBaseVolume * 0.2 : bgmBaseVolume;
+  } catch (e) { console.warn('Using default audio settings', e); }
+  bgmSettingsReady = true;
+  updateBgmUI(false);
+  if (audioUnlocked && currentPage > 1) playBGM();
+}
+
+/* ========================================================
+   2. WELCOME INTERACTION & SFX (PAPER GLIDE & STATE MACHINE)
+   ======================================================== */
+let WELCOME_STATE = 'idle'; // 'idle' | 'opening' | 'enteringMenu' | 'enteringChef'
+let hasOpenedWelcome = false;
+let sfxEnabled = true;
+
+function toggleSFX() {
+  sfxEnabled = !sfxEnabled;
+  const btn = document.getElementById('sfx-toggle-btn');
+  const label = document.getElementById('sfx-label');
+  const icon = document.getElementById('sfx-icon');
+  if (btn) btn.classList.toggle('active', sfxEnabled);
+  if (label) label.textContent = sfxEnabled ? '효과음: ON' : '효과음: OFF';
+  if (icon) icon.textContent = sfxEnabled ? '🔔' : '🔕';
+  showToast(sfxEnabled ? "고급 종이 효과음이 켜졌습니다." : "효과음이 무음으로 설정되었습니다.");
+}
+
+function playPaperGlideSound() {
+  if (!sfxEnabled) return;
+  try {
+    const paperAudio = new Audio('assets/audio/paper_slide.wav');
+    paperAudio.volume = 0.35;
+    const playPromise = paperAudio.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {
+        synthesizePaperFriction();
+      });
+    }
+  } catch (e) {
+    synthesizePaperFriction();
+  }
+}
+
+// Zero-latency Web Audio API synthesis fallback
+function synthesizePaperFriction() {
+  try {
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContext) return;
+    const ctx = new AudioContext();
+    const duration = 0.45;
+    const bufferSize = Math.floor(ctx.sampleRate * duration);
+    const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+    const data = buffer.getChannelData(0);
+    for (let i = 0; i < bufferSize; i++) {
+      data[i] = (Math.random() * 2 - 1) * 0.15;
+    }
+    const noise = ctx.createBufferSource();
+    noise.buffer = buffer;
+    
+    const filter = ctx.createBiquadFilter();
+    filter.type = 'bandpass';
+    filter.frequency.value = 850;
+    filter.Q.value = 1.2;
+    
+    const gain = ctx.createGain();
+    const now = ctx.currentTime;
+    gain.gain.setValueAtTime(0.001, now);
+    gain.gain.exponentialRampToValueAtTime(0.22, now + 0.06);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + duration);
+    
+    noise.connect(filter);
+    filter.connect(gain);
+    gain.connect(ctx.destination);
+    
+    noise.start(now);
+    noise.stop(now + duration);
+  } catch (err) {
+    // Graceful silent fallback
+  }
+}
+
+/* ========================================================
+   3. AUDIO & VOICE NARRATION WITH SMART BGM DUCKING
+   ======================================================== */
+function unlockAudio() {
+  if (audioUnlocked) return;
+  audioUnlocked = true;
+}
+
+function playBGM() {
+  if (!bgmSettingsReady || !bgmEnabled || bgmUserPaused) return;
+  bgmAudio.play().then(() => {
+    isBgmPlaying = true;
+    updateBgmUI(true);
+  }).catch(() => {});
+}
+
+function toggleBGM() {
+  if (!bgmSettingsReady) return;
+  if (!bgmEnabled) { showToast('배경음악이 관리자 설정에서 꺼져 있습니다.'); return; }
+  if (isBgmPlaying) {
+    bgmUserPaused = true;
+    bgmAudio.pause();
+    isBgmPlaying = false;
+    updateBgmUI(false);
+    showToast("잔잔한 배경음악이 일시정지되었습니다.");
+  } else {
+    bgmUserPaused = false;
+    bgmAudio.play().then(() => {
+      isBgmPlaying = true;
+      updateBgmUI(true);
+      showToast("잔잔한 배경음악이 재생됩니다.");
+    }).catch(() => {});
+  }
+}
+
+function updateBgmUI(playing) {
+  document.querySelectorAll('#bgm-toggle-btn, .ctrl-pill').forEach(btn => {
+    if (btn.id === 'bgm-toggle-btn' || btn.querySelector('.bgm-sub-label')) {
+      btn.classList.toggle('active', playing);
+    }
+  });
+  const label = document.getElementById('bgm-label');
+  if (label) label.textContent = playing ? '♫ BGM: ON' : '♫ BGM: OFF';
+}
+
+function toggleVoiceEngine() {
+  voiceEngine = voiceEngine === 'ai' ? 'ipad' : 'ai';
+  const label = document.getElementById('voice-mode-label');
+  const typeLabel = document.getElementById('docent-voice-type-label');
+  if (voiceEngine === 'ipad') {
+    if (label) label.textContent = '🎙️ 아이패드 보이스';
+    if (typeLabel) typeLabel.textContent = 'IPAD NATIVE VOICE DOCENT';
+    showToast("아이패드 내장 보이스(Siri/Yuna) 모드로 전환되었습니다.");
+  } else {
+    if (label) label.textContent = '🎙️ AI 스튜디오 보이스';
+    if (typeLabel) typeLabel.textContent = "CHEF'S VOICE DOCENT";
+    showToast("최고급 AI 스튜디오 나레이션 모드로 전환되었습니다.");
+  }
+}
+
+function duckBgm(duck) {
+  bgmDucked = duck;
+  clearInterval(bgmFadeTimer);
+  const target = duck ? bgmBaseVolume * 0.2 : bgmBaseVolume;
+  bgmFadeTimer = setInterval(() => {
+    const delta = target - bgmAudio.volume;
+    if (Math.abs(delta) <= 0.02) { bgmAudio.volume = target; clearInterval(bgmFadeTimer); }
+    else bgmAudio.volume = Math.max(0, Math.min(1, bgmAudio.volume + Math.sign(delta) * 0.02));
+  }, 40);
+}
+
+function speakNarration(text, audioSrc) {
+  stopNarration();
+  duckBgm(true);
+  updateDocentButton(true);
+
+  if (audioSrc) {
+    narrationAudio.src = audioSrc;
+    narrationAudio.currentTime = 0;
+    narrationAudio.play().then(() => {
+      narrationAudio.onended = () => {
+        duckBgm(false);
+        updateDocentButton(false);
+      };
+    }).catch(err => {
+      console.log('Audio playback fallback to speech synthesis:', err);
+      speakWithNativeVoice(text);
+    });
+  } else {
+    speakWithNativeVoice(text);
+  }
+}
+
+function speakWithNativeVoice(text) {
+  if (!('speechSynthesis' in window)) {
+    duckBgm(false);
+    updateDocentButton(false);
+    return;
+  }
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'ko-KR';
+  u.rate = 0.88;
+  u.pitch = 1.0;
+  
+  const voices = window.speechSynthesis.getVoices();
+  const koVoice = voices.find(v => v.lang.startsWith('ko') && (v.name.includes('Yuna') || v.name.includes('Siri') || v.name.includes('Premium')));
+  if (koVoice) u.voice = koVoice;
+
+  u.onend = () => {
+    duckBgm(false);
+    updateDocentButton(false);
+  };
+  u.onerror = () => {
+    duckBgm(false);
+    updateDocentButton(false);
+  };
+  window.speechSynthesis.speak(u);
+}
+
+function stopNarration() {
+  narrationAudio.pause();
+  if ('speechSynthesis' in window) {
+    window.speechSynthesis.cancel();
+  }
+  duckBgm(false);
+  updateDocentButton(false);
+}
+
+function updateDocentButton(isPlaying) {
+  const btn = document.getElementById('detail-audio-btn');
+  const bar = document.getElementById('docent-bar-wrap');
+  if (btn) {
+    btn.classList.toggle('active', isPlaying);
+    btn.textContent = isPlaying ? '❚❚ 음성 나레이션 정지' : '▶ 음성 다시 듣기';
+  }
+  if (bar) {
+    bar.classList.toggle('playing', isPlaying);
+  }
+}
+
+function toggleDetailNarration() {
+  if (!narrationAudio.paused || (window.speechSynthesis && window.speechSynthesis.speaking)) {
+    stopNarration();
+  } else if (currentDish) {
+    const text = `${currentDish.nameKo || currentDish.name}. ${currentDish.desc}`;
+    speakNarration(text, currentDish.audio);
+  }
+}
+
+/* ========================================================
+   4. NAVIGATION & CHEF VELVET GRADIENT OVERLAY
+   ======================================================== */
+const screens = [1, 2, 3, 4, 5, 6].map(i => document.getElementById('p' + i));
+
+let hasSeenChefIntro = false;
+let chefTimelineTimers = [];
+let isChefNavigating = false;
+
+function clearChefTimers() {
+  chefTimelineTimers.forEach(t => clearTimeout(t));
+  chefTimelineTimers = [];
+}
+
+function openChefOverlay() {
+  unlockAudio();
+  clearChefTimers();
+  const chefOverlay = document.getElementById('p2');
+  if (!chefOverlay) return;
+
+  isChefNavigating = false;
+  chefOverlay.classList.remove('step-portrait', 'step-frame', 'step-top', 'step-title', 'step-bio', 'step-dividers', 'step-stars', 'exit');
+  chefOverlay.classList.add('active');
+
+  // Speak chef greeting philosophy
+  speakNarration("좋은 음식은 함께하는 사람에게서 완성됩니다. 한 끼의 식사를 위해 준비한 재료와 시간, 오늘 이 자리가 오래도록 기억될 수 있도록 정성스럽게 준비했습니다.", 'assets/audio/chef.mp3');
+
+  const isReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (hasSeenChefIntro || isReducedMotion) {
+    chefOverlay.classList.add('step-portrait', 'step-frame', 'step-top', 'step-title', 'step-bio', 'step-dividers', 'step-stars');
+    return;
+  }
+
+  // First-time 1.5s orchestrated sequence
+  hasSeenChefIntro = true;
+  chefTimelineTimers.push(setTimeout(() => chefOverlay.classList.add('step-portrait'), 120));
+  chefTimelineTimers.push(setTimeout(() => chefOverlay.classList.add('step-frame'), 260));
+  chefTimelineTimers.push(setTimeout(() => chefOverlay.classList.add('step-top'), 520));
+  chefTimelineTimers.push(setTimeout(() => chefOverlay.classList.add('step-title'), 640));
+  chefTimelineTimers.push(setTimeout(() => chefOverlay.classList.add('step-bio'), 780));
+  chefTimelineTimers.push(setTimeout(() => chefOverlay.classList.add('step-dividers'), 1050));
+  chefTimelineTimers.push(setTimeout(() => chefOverlay.classList.add('step-stars'), 1150));
+}
+
+function closeChefOverlay() {
+  if (isChefNavigating) return;
+  isChefNavigating = true;
+  clearChefTimers();
+  stopNarration();
+  const chefOverlay = document.getElementById('p2');
+  if (chefOverlay) {
+    chefOverlay.classList.add('exit');
+    setTimeout(() => {
+      chefOverlay.classList.remove('active', 'exit');
+      isChefNavigating = false;
+      if (currentPage === 1) {
+        WELCOME_STATE = 'idle';
+      }
+    }, 300);
+  } else {
+    isChefNavigating = false;
+  }
+}
+
+function discoverMenuFromChef() {
+  if (isChefNavigating) return;
+  isChefNavigating = true;
+  clearChefTimers();
+  stopNarration();
+  currentCategoryFilter = 'ALL DISHES';
+  const chefOverlay = document.getElementById('p2');
+  if (chefOverlay) {
+    chefOverlay.classList.add('exit');
+    setTimeout(() => {
+      chefOverlay.classList.remove('active', 'exit');
+      isChefNavigating = false;
+      goToPage(4);
+    }, 300);
+  } else {
+    isChefNavigating = false;
+    goToPage(4);
+  }
+}
+
+let pageTimelineTimers = [];
+function clearPageTimers() {
+  pageTimelineTimers.forEach(t => clearTimeout(t));
+  pageTimelineTimers = [];
+}
+
+function goToPage(pageIndex) {
+  if (detailModelViewer) detailModelViewer.clear();
+  stopAutoTurntable();
+  unlockAudio();
+  stopNarration();
+  clearPageTimers();
+
+  if (pageIndex === 2) {
+    openChefOverlay();
+    return;
+  }
+
+  const prevIndex = currentPage;
+  const prevScreen = screens[prevIndex - 1];
+  const targetScreen = screens[pageIndex - 1];
+
+  // Velvet veil subtle bloom for silk transition
+  const veil = document.getElementById('screen-veil');
+  if (veil) {
+    veil.classList.add('active');
+    setTimeout(() => veil.classList.remove('active'), 320);
+  }
+
+  // Gracefully dismiss previous screen
+  if (prevScreen && prevScreen !== targetScreen) {
+    if (prevIndex === 2) {
+      closeChefOverlay();
+    } else {
+      prevScreen.classList.add('exit');
+      setTimeout(() => {
+        prevScreen.classList.remove('active', 'exit');
+      }, 300);
+    }
+  }
+
+  // Activate target screen
+  if (targetScreen) {
+    targetScreen.classList.remove('exit');
+    targetScreen.classList.add('active');
+  }
+
+  currentPage = pageIndex;
+
+  // Start gentle BGM when transitioning into menu for the first time
+  if (pageIndex > 1 && !isBgmPlaying && audioUnlocked) {
+    playBGM();
+  }
+
+  const isReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (pageIndex === 1) {
+    WELCOME_STATE = 'idle';
+  } else if (pageIndex === 3) {
+    const p3 = document.getElementById('p3');
+    if (p3) {
+      p3.classList.remove('step-header', 'step-lead', 'step-title', 'step-artline', 'step-thread', 'step-lines', 'step-footer');
+      if (isReducedMotion) {
+        p3.classList.add('step-header', 'step-lead', 'step-title', 'step-artline', 'step-thread', 'step-lines', 'step-footer');
+      } else {
+        pageTimelineTimers.push(setTimeout(() => p3.classList.add('step-header'), 50));
+        pageTimelineTimers.push(setTimeout(() => p3.classList.add('step-lead'), 130));
+        pageTimelineTimers.push(setTimeout(() => p3.classList.add('step-title'), 230));
+        pageTimelineTimers.push(setTimeout(() => p3.classList.add('step-artline'), 360));
+        pageTimelineTimers.push(setTimeout(() => p3.classList.add('step-thread'), 470));
+        pageTimelineTimers.push(setTimeout(() => p3.classList.add('step-lines'), 580));
+        pageTimelineTimers.push(setTimeout(() => p3.classList.add('step-footer'), 760));
+      }
+    }
+  } else if (pageIndex === 4) {
+    if (!currentCategoryFilter) currentCategoryFilter = 'ALL DISHES';
+    setCategoryFilter(currentCategoryFilter);
+    const scrollContainer = document.querySelector('.menu .screen-content');
+    if (scrollContainer) scrollContainer.scrollTop = 0;
+
+    const p4 = document.getElementById('p4');
+    if (p4) {
+      p4.classList.remove('step-header', 'step-title', 'step-tabs', 'step-grid', 'step-footer');
+      if (isReducedMotion) {
+        p4.classList.add('step-header', 'step-title', 'step-tabs', 'step-grid', 'step-footer');
+      } else {
+        pageTimelineTimers.push(setTimeout(() => p4.classList.add('step-header'), 50));
+        pageTimelineTimers.push(setTimeout(() => p4.classList.add('step-title'), 140));
+        pageTimelineTimers.push(setTimeout(() => p4.classList.add('step-tabs'), 250));
+        pageTimelineTimers.push(setTimeout(() => p4.classList.add('step-grid'), 370));
+        pageTimelineTimers.push(setTimeout(() => p4.classList.add('step-footer'), 680));
+      }
+    }
+  } else if (pageIndex === 5 && currentDish) {
+    const text = `${currentDish.nameKo || currentDish.name}. ${currentDish.desc}`;
+    speakNarration(text, currentDish.audio);
+    initDishViewer(currentDish);
+
+    const p5 = document.getElementById('p5');
+    if (p5) {
+      p5.classList.remove('step-plate', 'step-tag', 'step-name', 'step-story', 'step-ingredients', 'step-actions', 'step-close');
+      if (isReducedMotion) {
+        p5.classList.add('step-plate', 'step-tag', 'step-name', 'step-story', 'step-ingredients', 'step-actions', 'step-close');
+      } else {
+        pageTimelineTimers.push(setTimeout(() => p5.classList.add('step-plate'), 60));
+        pageTimelineTimers.push(setTimeout(() => p5.classList.add('step-tag'), 180));
+        pageTimelineTimers.push(setTimeout(() => p5.classList.add('step-name'), 280));
+        pageTimelineTimers.push(setTimeout(() => p5.classList.add('step-story'), 390));
+        pageTimelineTimers.push(setTimeout(() => p5.classList.add('step-ingredients'), 510));
+        pageTimelineTimers.push(setTimeout(() => p5.classList.add('step-actions'), 630));
+        pageTimelineTimers.push(setTimeout(() => p5.classList.add('step-close'), 750));
+      }
+    }
+  } else if (pageIndex === 6) {
+    if (!isSubmittingOrder) {
+      const dt = formatOrderDateTime();
+      const items = Object.entries(selectedCart).map(([id, qty]) => {
+        const d = dishes.find(dish => dish.id == id);
+        return {
+          id: id,
+          num: d ? d.num : '',
+          name: d ? d.name : `Dish #${id}`,
+          qty: qty
+        };
+      });
+      startOrderConfirmationSequence({
+        orderId: dt.orderId,
+        tableNo: "A-3",
+        items: items,
+        totalCount: Object.values(selectedCart).reduce((a, b) => a + b, 0),
+        dateStr: dt.dateStr,
+        timeStr: dt.timeStr,
+        timestamp: dt.timestamp
+      });
+    }
+  }
+}
+
+function handleWelcomeScreenTouch(event) {
+  unlockAudio();
+  if (WELCOME_STATE !== 'idle') return;
+
+  const isReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Immediate smooth fade on session re-entry or reduced motion
+  if (hasOpenedWelcome || isReducedMotion) {
+    WELCOME_STATE = 'enteringMenu';
+    playPaperGlideSound();
+    goToPage(3);
+    WELCOME_STATE = 'idle';
+    return;
+  }
+
+  // First-time silky envelope opening sequence (~0.95s)
+  WELCOME_STATE = 'opening';
+  const p1 = document.getElementById('p1');
+  if (p1) p1.classList.add('opening');
+  playPaperGlideSound();
+
+  setTimeout(() => {
+    goToPage(3);
+    hasOpenedWelcome = true;
+    WELCOME_STATE = 'idle';
+    setTimeout(() => {
+      if (p1) p1.classList.remove('opening');
+    }, 400);
+  }, 950);
+}
+
+function handleChefFrameTouch() {
+  unlockAudio();
+  if (WELCOME_STATE === 'opening') return;
+  WELCOME_STATE = 'enteringChef';
+  openChefOverlay();
+}
+
+function filterAndGo(category) {
+  currentCategoryFilter = category || 'ALL DISHES';
+  goToPage(4);
+}
+
+/* ========================================================
+   INACTIVITY AUTO-RETURN TIMER (WITH CART PRESERVATION)
+   ======================================================== */
+let lastUserActivity = Date.now();
+const INACTIVITY_LIMIT_MS = 180000; // 3 minutes
+
+function recordUserActivity() {
+  lastUserActivity = Date.now();
+}
+
+['pointerdown', 'touchstart', 'scroll', 'keydown'].forEach(evt => {
+  window.addEventListener(evt, recordUserActivity, { passive: true });
+});
+
+setInterval(() => {
+  if (Date.now() - lastUserActivity > INACTIVITY_LIMIT_MS) {
+    if (currentPage !== 1 && currentPage !== 6) {
+      console.log('Inactivity timeout reached: returning to Welcome screen (preserving cart)');
+      goToPage(1);
+    }
+  }
+}, 10000);
+
+/* ========================================================
+   5. MENU LIST & SELECTION
+   ======================================================== */
+function setCategoryFilter(category) {
+  currentCategoryFilter = category || 'ALL DISHES';
+  document.querySelectorAll('#category-tabs button').forEach(btn => {
+    const cat = btn.getAttribute('data-cat') || btn.textContent.trim();
+    btn.classList.toggle('active', cat === currentCategoryFilter);
+  });
+  renderDishList();
+}
+
+function renderDishList() {
+  const grid = document.getElementById('dishes-grid');
+  grid.innerHTML = '';
+  
+  let filtered = (!currentCategoryFilter || currentCategoryFilter === 'ALL DISHES')
+    ? dishes 
+    : dishes.filter(d => d.category === currentCategoryFilter);
+
+  // If selected category is empty, gracefully fallback to ALL DISHES
+  if (filtered.length === 0 && currentCategoryFilter !== 'ALL DISHES') {
+    currentCategoryFilter = 'ALL DISHES';
+    document.querySelectorAll('#category-tabs button').forEach(btn => {
+      const cat = btn.getAttribute('data-cat') || btn.textContent.trim();
+      btn.classList.toggle('active', cat === 'ALL DISHES');
+    });
+    filtered = dishes;
+  }
+
+  filtered.forEach(dish => {
+    const isSold = dish.soldOut || (dish.stock !== undefined && dish.stock <= 0);
+    const card = document.createElement('div');
+    card.className = 'dish' + (isSold ? ' sold-out' : '');
+    card.setAttribute('aria-disabled', String(isSold));
+    card.onclick = () => {
+      if (isSold) {
+        showToast('품절된 메뉴입니다.');
+      } else {
+        openDishDetail(dish.id);
+      }
+    };
+    
+    const badgeText = isSold 
+      ? '품절 · SOLD OUT' 
+      : (dish.model ? '3D VIEW ⟲' : (dish.category === 'DRINKS' ? 'DRINK ✦' : 'PHOTO'));
+
+    card.innerHTML = `
+      <div class="photo">
+        <img src="${dish.image}" alt="${dish.name}">
+        <span class="dish-3d-badge">${badgeText}</span>
+      </div>
+      <div class="dish-info">
+        <strong>${dish.name}</strong>
+        <i>${dish.num} ↗</i>
+      </div>
+      <p>${dish.sub}</p>
+    `;
+    grid.appendChild(card);
+  });
+  updateCartBadge();
+}
+
+function openDishDetail(dishId) {
+  currentDish = dishes.find(d => d.id === dishId) || dishes[0];
+  const isSold = currentDish && (currentDish.soldOut || (currentDish.stock !== undefined && currentDish.stock <= 0));
+  if (!currentDish || isSold) { showToast('품절된 메뉴입니다.'); return; }
+  detailQty = 1;
+  isPhotoMode = false;
+  
+  const toggleBtn = document.getElementById('photo-mode-toggle-btn');
+  const toggleIcon = document.getElementById('photo-toggle-icon');
+  const toggleText = document.getElementById('photo-toggle-text');
+  if (toggleBtn) toggleBtn.classList.remove('is-photo-mode');
+  if (toggleIcon) toggleIcon.textContent = '📷';
+  if (toggleText) toggleText.textContent = '사진으로 보기';
+  
+  document.getElementById('detail-category-num').innerHTML = `${currentDish.category} &nbsp; / &nbsp; NO. ${currentDish.num}`;
+  document.getElementById('detail-en-name').innerHTML = `${currentDish.name.split(' ').join('<br>')}.`;
+  document.getElementById('detail-ko-name').textContent = currentDish.nameKo || currentDish.name;
+  document.getElementById('detail-desc').textContent = currentDish.desc;
+  document.getElementById('detail-ingredients').innerHTML = currentDish.ingredients;
+  document.getElementById('detail-qty-val').textContent = '01';
+
+  goToPage(5);
+}
+
+function openQuantityPicker() {
+  const maxStock = (currentDish && currentDish.stock !== undefined) ? Math.max(1, currentDish.stock) : 10;
+  openQuantityDial(detailQty, value => {
+    detailQty = value;
+    document.getElementById('detail-qty-val').textContent = String(value).padStart(2, '0');
+  }, maxStock);
+}
+function changeQty(delta) {
+  const maxStock = (currentDish && currentDish.stock !== undefined) ? Math.max(1, currentDish.stock) : 10;
+  detailQty = Math.max(1, Math.min(maxStock, detailQty + delta));
+  document.getElementById('detail-qty-val').textContent = String(detailQty).padStart(2, '0');
+}
+
+function addCurrentDishToCart() {
+  if (!currentDish) return;
+  const isSold = currentDish.soldOut || (currentDish.stock !== undefined && currentDish.stock <= 0);
+  if (isSold) {
+    showToast('품절된 메뉴는 주문할 수 없습니다.');
+    return;
+  }
+  const currentCartQty = selectedCart[currentDish.id] || 0;
+  const availableStock = currentDish.stock !== undefined ? currentDish.stock : 99;
+  if (currentCartQty + detailQty > availableStock) {
+    showToast(`남은 준비 수량(${availableStock}개)을 초과하여 담을 수 없습니다.`);
+    return;
+  }
+  if (!selectedCart[currentDish.id]) {
+    selectedCart[currentDish.id] = 0;
+  }
+  selectedCart[currentDish.id] += detailQty;
+  showToast(`✓ ${currentDish.nameKo || currentDish.name} (${detailQty}개)가 담겼습니다.`);
+  updateCartBadge();
+  goToPage(4);
+}
+
+let isSubmittingOrder = false;
+let orderTimelineTimers = [];
+
+function updateCartBadge() {
+  const totalCount = Object.values(selectedCart).reduce((a, b) => a + b, 0);
+  const badge = document.getElementById('cart-counter-badge');
+  if (badge) {
+    badge.innerHTML = `TONIGHT'S SELECTION &nbsp;&nbsp; ◯ ${String(totalCount).padStart(2, '0')}`;
+  }
+  const checkoutBar = document.getElementById('floating-checkout-bar');
+  const checkoutCount = document.getElementById('checkout-items-count');
+  if (checkoutBar) {
+    if (totalCount > 0) {
+      checkoutBar.classList.add('visible');
+      if (checkoutCount) checkoutCount.textContent = `(${totalCount})`;
+    } else {
+      checkoutBar.classList.remove('visible');
+    }
+  }
+}
+
+function formatOrderDateTime() {
+  const now = new Date();
+  const months = ["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"];
+  const dateStr = `${months[now.getMonth()]} ${String(now.getDate()).padStart(2, '0')}, ${now.getFullYear()}`;
+  let hours = now.getHours();
+  const ampm = hours >= 12 ? 'PM' : 'AM';
+  hours = hours % 12 || 12;
+  const timeStr = `${String(hours).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')} ${ampm}`;
+  const orderId = `#204-${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getDate()).padStart(2, '0')}-${String(Math.floor(Math.random() * 90) + 10)}`;
+  return { dateStr, timeStr, orderId, timestamp: now.toISOString() };
+}
+
+function generateBarcodeSvg(orderId) {
+  const pattern = [2, 1, 3, 1, 1, 2, 4, 1, 2, 3, 1, 2, 1, 4, 2, 1, 1, 3, 2, 1, 3, 2, 1, 1, 4, 1, 2, 1, 3, 2];
+  let x = 6;
+  let svgContent = '';
+  pattern.forEach((w, i) => {
+    if (i % 2 === 0) {
+      svgContent += `<rect x="${x}" y="0" width="${w * 1.5}" height="32" fill="#2e1a17" />`;
+    }
+    x += w * 2.1;
+  });
+  const svgEl = document.getElementById('receipt-barcode-svg');
+  if (svgEl) {
+    svgEl.setAttribute('viewBox', `0 0 ${Math.ceil(x + 6)} 32`);
+    svgEl.innerHTML = svgContent;
+  }
+}
+
+function renderReceipt(orderData) {
+  const itemsContainer = document.getElementById('receipt-items-container');
+  if (itemsContainer) {
+    if (!orderData.items || orderData.items.length === 0) {
+      itemsContainer.innerHTML = `
+        <div class="receipt-item-row">
+          <span class="receipt-item-name">04 Hanwoo Tenderloin</span>
+          <span class="receipt-item-qty">× 1</span>
+        </div>
+        <div class="receipt-item-row">
+          <span class="receipt-item-name">01 Hokkaido Scallop</span>
+          <span class="receipt-item-qty">× 1</span>
+        </div>
+      `;
+    } else {
+      itemsContainer.innerHTML = orderData.items.map(it => `
+        <div class="receipt-item-row">
+          <span class="receipt-item-name">${it.num ? it.num + ' ' : ''}${it.name}</span>
+          <span class="receipt-item-qty">× ${it.qty}</span>
+        </div>
+      `).join('');
+    }
+  }
+
+  const dateEl = document.getElementById('receipt-date-val');
+  const timeEl = document.getElementById('receipt-time-val');
+  const orderNoEl = document.getElementById('receipt-barcode-text');
+  
+  if (dateEl) dateEl.textContent = orderData.dateStr || 'OCTOBER 30, 2026';
+  if (timeEl) timeEl.textContent = orderData.timeStr || '07:42 PM';
+  if (orderNoEl) orderNoEl.textContent = orderData.orderId || '#204-1030-01';
+
+  generateBarcodeSvg(orderData.orderId || '#204-1030-01');
+}
+
+function clearOrderTimers() {
+  orderTimelineTimers.forEach(t => clearTimeout(t));
+  orderTimelineTimers = [];
+  const p6 = document.getElementById('p6');
+  if (p6) {
+    p6.classList.remove('revealed', 'phase-brand', 'phase-msg', 'phase-details', 'phase-stamp', 'phase-barcode', 'phase-ready', 'exit');
+  }
+}
+
+function startOrderConfirmationSequence(orderData) {
+  clearOrderTimers();
+  isSubmittingOrder = true;
+  const p6 = document.getElementById('p6');
+  if (!p6) return;
+
+  // Reset phase classes
+  p6.classList.remove('revealed', 'phase-brand', 'phase-msg', 'phase-details', 'phase-stamp', 'phase-barcode', 'phase-ready', 'exit');
+
+  // Render receipt items & metadata
+  renderReceipt(orderData);
+
+  // Switch to Page 6
+  goToPage(6);
+
+  const isReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (isReducedMotion) {
+    p6.classList.add('revealed', 'phase-brand', 'phase-msg', 'phase-details', 'phase-stamp', 'phase-barcode', 'phase-ready');
+    const completeText = "주문이 접수되었습니다. 정성껏 준비하겠습니다. 오늘의 식사를 천천히 즐겨주세요.";
+    speakNarration(completeText, 'assets/audio/order_complete.mp3');
+    isSubmittingOrder = false;
+    return;
+  }
+
+  // Phase 1 — Tactile Paper Glide onto Linen (0–600ms)
+  orderTimelineTimers.push(setTimeout(() => {
+    p6.classList.add('revealed');
+    try {
+      const paperAudio = new Audio('assets/audio/paper_slide.wav');
+      paperAudio.volume = 0.4;
+      paperAudio.play().catch(() => {});
+    } catch (_) {}
+  }, 40));
+
+  // Phase 2A — Brand identity (650ms)
+  orderTimelineTimers.push(setTimeout(() => {
+    p6.classList.add('phase-brand');
+  }, 650));
+
+  // Phase 2B — Order placed message (900ms)
+  orderTimelineTimers.push(setTimeout(() => {
+    p6.classList.add('phase-msg');
+  }, 900));
+
+  // Phase 2C — Dynamic order items & details (1150ms)
+  orderTimelineTimers.push(setTimeout(() => {
+    p6.classList.add('phase-details');
+  }, 1150));
+
+  // Phase 3 — Chef Confirmation Stamp Imprint (1500ms)
+  orderTimelineTimers.push(setTimeout(() => {
+    p6.classList.add('phase-stamp');
+  }, 1500));
+
+  // Phase 4 — Barcode Reveal (1850ms)
+  orderTimelineTimers.push(setTimeout(() => {
+    p6.classList.add('phase-barcode');
+  }, 1850));
+
+  // Phase 5 — Warm Voice Confirmation (~2150ms)
+  orderTimelineTimers.push(setTimeout(() => {
+    const completeText = "주문이 접수되었습니다. 정성껏 준비하겠습니다. 오늘의 식사를 천천히 즐겨주세요.";
+    speakNarration(completeText, 'assets/audio/order_complete.mp3');
+  }, 2150));
+
+  // Phase 6 — Ready State: Back to Menu & Actions Active (2550ms)
+  orderTimelineTimers.push(setTimeout(() => {
+    p6.classList.add('phase-ready');
+    isSubmittingOrder = false;
+  }, 2550));
+}
+
+async function submitOrder() {
+  if (isSubmittingOrder) return;
+
+  const totalCount = Object.values(selectedCart).reduce((a, b) => a + b, 0);
+
+  isSubmittingOrder = true;
+  unlockAudio();
+
+  const dt = formatOrderDateTime();
+  let items = [];
+  if (totalCount === 0) {
+    const d1 = dishes.find(d => d.id == 4) || dishes[0] || { id: 4, num: '04', name: 'Hanwoo Tenderloin', nameKo: '한우 안심과 트러플' };
+    items = [{
+      id: d1.id,
+      num: d1.num || '04',
+      name: d1.name,
+      nameKo: d1.nameKo || d1.name,
+      qty: 1
+    }];
+  } else {
+    items = Object.entries(selectedCart).map(([id, qty]) => {
+      const d = dishes.find(dish => dish.id == id);
+      return {
+        id: id,
+        num: d ? d.num : '',
+        name: d ? d.name : `Dish #${id}`,
+        nameKo: d ? (d.nameKo || d.name) : '',
+        qty: qty
+      };
+    });
+  }
+
+  const orderPayload = {
+    orderId: dt.orderId,
+    tableNo: "A-3",
+    items: items,
+    totalCount: totalCount > 0 ? totalCount : 1,
+    dateStr: dt.dateStr,
+    timeStr: dt.timeStr,
+    timestamp: dt.timestamp
+  };
+
+  try {
+    const res = await fetch('/api/order', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(orderPayload)
+    });
+    if (!res.ok) throw new Error('주문 저장 실패');
+    const result = await res.json();
+    if (!result.success) throw new Error('주문 접수 실패');
+  } catch (err) {
+    console.warn('Order submission failed:', err);
+    isSubmittingOrder = false;
+    showToast('주문이 접수되지 않았습니다. 연결을 확인한 뒤 다시 시도해주세요.');
+    return;
+  }
+
+  // Proceed directly to the confirmation animation sequence
+  startOrderConfirmationSequence(orderPayload);
+}
+
+function handleBackToMenu() {
+  clearOrderTimers();
+  const p6 = document.getElementById('p6');
+  if (p6) {
+    p6.classList.add('exit');
+  }
+
+  // Clear current cart selection
+  selectedCart = {};
+  updateCartBadge();
+
+  setTimeout(() => {
+    if (p6) {
+      p6.classList.remove('revealed', 'phase-brand', 'phase-msg', 'phase-details', 'phase-stamp', 'phase-barcode', 'phase-ready', 'exit');
+    }
+    isSubmittingOrder = false;
+    goToPage(4);
+  }, 350);
+}
+
+function replayOrderAudio() {
+  unlockAudio();
+  showToast("안내 음성을 다시 들려드립니다.");
+  const completeText = "주문이 접수되었습니다. 정성껏 준비하겠습니다. 오늘의 식사를 천천히 즐겨주세요.";
+  speakNarration(completeText, 'assets/audio/order_complete.mp3');
+}
+
+/* ========================================================
+   NATURAL IPAD SWIPE GESTURE PAGE TURNING (터치 스와이프 페이지 넘김)
+   ======================================================== */
+let touchStartX = 0;
+let touchStartY = 0;
+let touchStartTime = 0;
+
+window.addEventListener('touchstart', (e) => {
+  if (e.touches.length === 1) {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+    touchStartTime = Date.now();
+  }
+}, { passive: true });
+
+window.addEventListener('touchend', (e) => {
+  if (e.changedTouches.length === 1) {
+    const diffX = e.changedTouches[0].clientX - touchStartX;
+    const diffY = e.changedTouches[0].clientY - touchStartY;
+    const time = Date.now() - touchStartTime;
+
+    // Check if swipe is horizontal and sufficiently deliberate
+    if (Math.abs(diffX) > 65 && Math.abs(diffX) > Math.abs(diffY) * 1.4 && time < 800) {
+      // Ignore if touch started on 360 photo turntable
+      const target = document.elementFromPoint(touchStartX, touchStartY);
+      if (target && target.closest && target.closest('#photo-360-container')) {
+        return;
+      }
+
+      if (diffX < 0) {
+        // Swipe Left: Next Page
+        if (currentPage === 1) {
+          handleWelcomeScreenTouch();
+        } else if (currentPage === 3) {
+          goToPage(4);
+        }
+      } else {
+        // Swipe Right: Previous Page
+        if (currentPage === 2) {
+          closeChefOverlay();
+        } else if (currentPage === 3) {
+          goToPage(1);
+        } else if (currentPage === 4) {
+          if (touchStartX < 80 && Math.abs(diffY) < 40) {
+            goToPage(3);
+          }
+        } else if (currentPage === 5) {
+          goToPage(4);
+        } else if (currentPage === 6) {
+          handleBackToMenu();
+        }
+      }
+    }
+  }
+}, { passive: true });
+
+function showToast(msg) {
+  const toast = document.getElementById('app-toast');
+  toast.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2400);
+}
+
+/* ========================================================
+   6. REAL PHOTO 360° SPIN & 2.5D INTERACTIVE VIEWER
+   ======================================================== */
+let photoFrames = [];
+let currentFrameIdx = 0;
+let isDragging360 = false;
+let startPointerX = 0;
+let startPointerY = 0;
+let tiltX = 0;
+let tiltY = 0;
+let currentZoom = 1.0;
+let autoTurntableTimer = null;
+let isPhotoMode = false;
+
+function togglePhotoMode(e) {
+  if (e) {
+    if (e.stopPropagation) e.stopPropagation();
+    if (e.preventDefault) e.preventDefault();
+  }
+  if (!currentDish) return;
+  isPhotoMode = !isPhotoMode;
+  applyPhotoMode();
+}
+
+function applyPhotoMode() {
+  const toggleBtn = document.getElementById('photo-mode-toggle-btn');
+  const toggleIcon = document.getElementById('photo-toggle-icon');
+  const toggleText = document.getElementById('photo-toggle-text');
+  const modelViewer = document.getElementById('dish-model-viewer');
+  const img = document.getElementById('photo-360-img');
+  const guide = document.getElementById('rotate-guide-text');
+  const container = document.getElementById('photo-360-container');
+
+  if (isPhotoMode) {
+    // 1. Switch to clean static 2D high-res food photo
+    stopAutoTurntable();
+    if (modelViewer) modelViewer.hidden = true;
+    img.hidden = false;
+    img.src = currentDish.image;
+    img.style.transform = 'scale(1) rotateX(0deg) rotateY(0deg)';
+    img.style.filter = 'contrast(1.02) drop-shadow(0 20px 32px rgba(78, 56, 44, 0.18))';
+    
+    // Clear rotation drag while in photo mode
+    if (container) {
+      container.onpointerdown = null;
+      container.onpointermove = null;
+      container.onpointerup = null;
+    }
+
+    if (toggleBtn) toggleBtn.classList.add('is-photo-mode');
+    if (toggleIcon) toggleIcon.textContent = '⟲';
+    if (toggleText) toggleText.textContent = (currentDish.model ? '3D 모델로 보기' : '3D 회전으로 보기');
+    if (guide) guide.textContent = '📷 DISH ORIGINAL PHOTO · 정물 사진 모드';
+  } else {
+    // 2. Switch back to 3D model or 360 turntable
+    if (toggleBtn) toggleBtn.classList.remove('is-photo-mode');
+    if (toggleIcon) toggleIcon.textContent = '📷';
+    if (toggleText) toggleText.textContent = '사진으로 보기';
+    
+    if (currentDish.model) {
+      img.hidden = true;
+      if (modelViewer) modelViewer.hidden = false;
+      if (detailModelViewer) {
+        detailModelViewer.show(currentDish.model, () => {
+          img.hidden = true;
+        }, () => {
+          img.hidden = false;
+          initPhoto360Viewer({...currentDish, frames360: [currentDish.image]});
+        });
+      } else {
+        initDishViewer(currentDish);
+      }
+    } else {
+      if (modelViewer) modelViewer.hidden = true;
+      img.hidden = false;
+      initPhoto360Viewer(currentDish);
+    }
+  }
+}
+
+let detailModelViewer = null;
+function initDishViewer(dish) {
+  isPhotoMode = false;
+  const toggleBtn = document.getElementById('photo-mode-toggle-btn');
+  const toggleIcon = document.getElementById('photo-toggle-icon');
+  const toggleText = document.getElementById('photo-toggle-text');
+  if (toggleBtn) toggleBtn.classList.remove('is-photo-mode');
+  if (toggleIcon) toggleIcon.textContent = '📷';
+  if (toggleText) toggleText.textContent = '사진으로 보기';
+
+  const container = document.getElementById('photo-360-container');
+  const img = document.getElementById('photo-360-img');
+  const guide = document.getElementById('rotate-guide-text');
+  if (!detailModelViewer) detailModelViewer = new DishViewer(document.getElementById('dish-model-viewer'), guide);
+  detailModelViewer.clear();
+  img.hidden = false;
+  img.src = dish.image;
+  img.style.transform = '';
+  ['onpointerdown','onpointermove','onpointerup','ontouchstart','ontouchmove'].forEach(key => container[key] = null);
+  if (!dish.model) { initPhoto360Viewer({...dish, frames360:[dish.image]}); return; }
+  detailModelViewer.show(dish.model, () => { img.hidden = true; }, () => {
+    img.hidden = false;
+    initPhoto360Viewer({...dish, frames360:[dish.image]});
+    guide.textContent = '3D를 불러오지 못해 사진을 표시합니다.';
+  });
+}
+function initPhoto360Viewer(dish) {
+  const container = document.getElementById('photo-360-container');
+  const img = document.getElementById('photo-360-img');
+  
+  photoFrames = (dish.frames360 && dish.frames360.length > 0) ? dish.frames360 : [dish.image];
+  currentFrameIdx = 0;
+  currentZoom = 1.0;
+  tiltX = 0;
+  tiltY = 0;
+  
+  img.src = photoFrames[0];
+  img.style.transform = `scale(1) rotateX(0deg) rotateY(0deg)`;
+
+  const guide = document.getElementById('rotate-guide-text');
+  if (photoFrames.length > 1) {
+    guide.textContent = `⟲  실사 360° 회전 뷰 (${photoFrames.length} 프레임)  ⟳`;
+  } else {
+    guide.textContent = `⟲  2.5D 인터랙티브 틸트 & 줌 뷰  ⟳`;
+  }
+
+  container.onpointerdown = (e) => {
+    isDragging360 = true;
+    startPointerX = e.clientX;
+    startPointerY = e.clientY;
+    container.setPointerCapture(e.pointerId);
+    stopAutoTurntable();
+  };
+
+  container.onpointermove = (e) => {
+    if (!isDragging360) return;
+    const dx = e.clientX - startPointerX;
+    const dy = e.clientY - startPointerY;
+
+    if (photoFrames.length > 1) {
+      if (Math.abs(dx) > 10) {
+        const step = dx > 0 ? 1 : -1;
+        currentFrameIdx = (currentFrameIdx + step + photoFrames.length) % photoFrames.length;
+        img.src = photoFrames[currentFrameIdx];
+        startPointerX = e.clientX;
+      }
+    } else {
+      tiltY = Math.max(-18, Math.min(18, tiltY + dx * 0.15));
+      tiltX = Math.max(-15, Math.min(15, tiltX - dy * 0.12));
+      img.style.transform = `scale(${currentZoom}) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
+      startPointerX = e.clientX;
+      startPointerY = e.clientY;
+    }
+  };
+
+  container.onpointerup = () => {
+    isDragging360 = false;
+    startAutoTurntable();
+  };
+
+  // Pinch Zoom gesture
+  let initialDist = 0;
+  container.ontouchstart = (e) => {
+    if (e.touches.length === 2) {
+      initialDist = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+    }
+  };
+  container.ontouchmove = (e) => {
+    if (e.touches.length === 2) {
+      const dist = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+      const factor = dist / initialDist;
+      currentZoom = Math.max(0.85, Math.min(1.8, currentZoom * factor));
+      img.style.transform = `scale(${currentZoom}) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
+      initialDist = dist;
+    }
+  };
+
+  startAutoTurntable();
+}
+
+function startAutoTurntable() {
+  stopAutoTurntable();
+  if (photoFrames.length > 1) {
+    autoTurntableTimer = setInterval(() => {
+      currentFrameIdx = (currentFrameIdx + 1) % photoFrames.length;
+      document.getElementById('photo-360-img').src = photoFrames[currentFrameIdx];
+    }, 180);
+  }
+}
+
+function stopAutoTurntable() {
+  if (autoTurntableTimer) {
+    clearInterval(autoTurntableTimer);
+    autoTurntableTimer = null;
+  }
+}
+
+function setPhotoPreset(preset) {
+  if (!isPhotoMode && detailModelViewer && detailModelViewer.renderer) { detailModelViewer.preset(preset); return; }
+  document.querySelectorAll('.view-tab').forEach(t => t.classList.remove('active'));
+  const img = document.getElementById('photo-360-img');
+  stopAutoTurntable();
+
+  if (preset === 'hero') {
+    currentZoom = 1.0; tiltX = 0; tiltY = 0;
+    img.style.transform = `scale(1) rotateX(0deg) rotateY(0deg)`;
+  } else if (preset === 'tilt-left') {
+    currentZoom = 1.05; tiltX = isPhotoMode ? 0 : 6; tiltY = isPhotoMode ? 0 : -14;
+    img.style.transform = `scale(1.05) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
+  } else if (preset === 'tilt-right') {
+    currentZoom = 1.05; tiltX = isPhotoMode ? 0 : 6; tiltY = isPhotoMode ? 0 : 14;
+    img.style.transform = `scale(1.05) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
+  } else if (preset === 'zoom') {
+    currentZoom = 1.45; tiltX = 0; tiltY = 0;
+    img.style.transform = `scale(1.45) rotateX(0deg) rotateY(0deg)`;
+  }
+
+  if (typeof event !== 'undefined' && event && event.currentTarget) {
+    event.currentTarget.classList.add('active');
+  }
+}
+
+/* ========================================================
+   7. INITIALIZATION
+   ======================================================== */
+async function initApp() {
+  loadAudioSettings();
+  try {
+    let res = await fetch('/api/dishes');
+    if (!res.ok) {
+      res = await fetch('dishes.json');
+    }
+    dishes = await res.json();
+  } catch (e) {
+    try {
+      const res = await fetch('dishes.json');
+      dishes = await res.json();
+    } catch (err) {
+      console.log('Using local fallback dishes data', err);
+    }
+  }
+  if (!dishes || dishes.length === 0) {
+    dishes = [
+      { id: 4, category: "SIGNATURE", num: "04", name: "Hanwoo Tenderloin", nameKo: "한우 안심과 트러플", sub: "celeriac purée · truffle · jus réduit", desc: "정성스럽게 구운 한우 안심에 트러플의 깊은 향과 부드러운 셀러리악 퓌레를 더했습니다.", ingredients: "HANWOO · BLACK TRUFFLE<br>CELERIAC · KING OYSTER", image: "assets/hero-dish.jpg", frames360: ["assets/hero-dish.jpg"], audio: "assets/audio/dish_4.mp3" }
+    ];
+  }
+  currentDish = dishes[0];
+  currentCategoryFilter = 'ALL DISHES';
+  setCategoryFilter('ALL DISHES');
+}
+
+initApp();
+</script>
+
+<script src="assets/js/quantity-dial.js"></script>
+<script src="assets/js/welcome-intro.js"></script>
+</body>
+</html>

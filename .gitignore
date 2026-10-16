@@ -1,0 +1,23 @@
+# Binary tools & executables
+cloudflared.exe
+*.exe
+
+# Dependencies & logs
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# Scratch & temporary development files
+scratch/
+scratch_order_preview/
+scratch_*.png
+59020a9b-c071-4c6c-996c-20006c1f8a16.png
+
+# OS & Editor files
+.DS_Store
+Thumbs.db
+*.tmp
+.vscode/
+.idea/
