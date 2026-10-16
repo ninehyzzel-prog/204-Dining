@@ -1,10 +1,9 @@
 {
+  "outputDirectory": "204_DINING_Landscape",
+  "cleanUrls": true,
   "rewrites": [
-    { "source": "/api/dishes", "destination": "/204_DINING_Landscape/dishes.json" },
-    { "source": "/api/audio-settings", "destination": "/204_DINING_Landscape/audio-settings.json" },
-    { "source": "/admin", "destination": "/204_DINING_Landscape/admin.html" },
-    { "source": "/admin.html", "destination": "/204_DINING_Landscape/admin.html" },
-    { "source": "/", "destination": "/204_DINING_Landscape/index.html" },
-    { "source": "/(.*)", "destination": "/204_DINING_Landscape/$1" }
+    { "source": "/api/dishes", "destination": "/dishes.json" },
+    { "source": "/api/audio-settings", "destination": "/audio-settings.json" },
+    { "source": "/admin", "destination": "/admin.html" }
   ]
 }
