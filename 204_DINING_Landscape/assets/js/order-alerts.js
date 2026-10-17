@@ -18,6 +18,18 @@
   let context, enabled = false, initialized = false, connected = false, timer, wakeLock;
   let nextSound = 0;
   const sources = new Set(), seen = new Set();
+  let alertBuffer = null;
+  async function loadAlertAudio() {
+    if (alertBuffer || !context) return;
+    try {
+      const res = await fetch('assets/audio/order_alert.wav');
+      if (res.ok) {
+        const arr = await res.arrayBuffer();
+        alertBuffer = await context.decodeAudioData(arr);
+      }
+    } catch (_) {}
+  }
+
   function state() { status.textContent = connected ? (enabled ? '● 연결됨 · 새 주문 소리 알림 켜짐' : '● 연결됨 · 소리 알림 꺼짐') : '연결 재시도 중…'; }
   async function unlock() {
     const AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -25,17 +37,38 @@
     context ||= new AudioContext();
     await context.resume();
     if (context.state !== 'running') throw new Error('소리 재생이 차단됐습니다. 알림 켜기를 다시 눌러주세요.');
+    loadAlertAudio();
   }
   function chime() {
     if (!context || context.state !== 'running') { status.textContent = '새 주문이 있습니다. 소리를 다시 켜려면 알림 버튼을 눌러주세요.'; return; }
-    const start = Math.max(context.currentTime, nextSound); nextSound = start + 1.1;
+    const start = Math.max(context.currentTime, nextSound); nextSound = start + 4.9;
+
+    // 1. Play master synthesized chime + voice audio
+    if (alertBuffer) {
+      const source = context.createBufferSource();
+      source.buffer = alertBuffer;
+      source.connect(context.destination);
+      source.start(start);
+      sources.add(source);
+      source.onended = () => sources.delete(source);
+      return;
+    }
+
+    // 2. Seamless layered fallback
     [880,1174.66,1567.98].forEach((frequency,i) => {
       const oscillator = context.createOscillator(), gain = context.createGain(), time = start + i * .22;
       oscillator.type = 'sine'; oscillator.frequency.value = frequency;
-      gain.gain.setValueAtTime(0, time); gain.gain.linearRampToValueAtTime(.24, time + .01); gain.gain.exponentialRampToValueAtTime(.001, time + .5);
-      oscillator.connect(gain); gain.connect(context.destination); oscillator.start(time); oscillator.stop(time + .55);
+      gain.gain.setValueAtTime(0, time); gain.gain.linearRampToValueAtTime(.26, time + .01); gain.gain.exponentialRampToValueAtTime(.001, time + .55);
+      oscillator.connect(gain); gain.connect(context.destination); oscillator.start(time); oscillator.stop(time + .6);
       sources.add(oscillator); oscillator.onended = () => { sources.delete(oscillator); oscillator.disconnect(); gain.disconnect(); };
     });
+
+    try {
+      setTimeout(() => {
+        const voice = new Audio('assets/audio/new_order_voice.mp3');
+        voice.play().catch(() => {});
+      }, 920);
+    } catch (_) {}
   }
   async function keepAwake() {
     if (enabled && document.visibilityState === 'visible' && navigator.wakeLock && !wakeLock) {
